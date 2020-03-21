@@ -60,9 +60,11 @@ public class TreeSetTests {
 
     @Test
     void testRemoveObj() {
-        Integer[] numbersNo100 = {10, 20, 11, -8, 7, 13, 9, 2, 70, 15, 21, 121, 500};
+        Integer[] numbersNo100 = { 10, 20, 11, 7, 13, 9, 2, 70, 15, 21, 121 };
         assertEquals(100, set.remove(100));
         assertNull(set.remove(100));
+        assertEquals(500, set.remove(500));
+        assertEquals(-8, set.remove(-8));
         testSetArray(set, numbersNo100);
     }
 

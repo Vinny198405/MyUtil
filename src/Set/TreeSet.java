@@ -73,7 +73,6 @@ public class TreeSet<T> implements Set<T> {
             parent = current;
             int cmp = comparator.compare(obj, current.obj);
             if (cmp == 0) return null;
-
             current = cmp < 0 ? current.left : current.right;
         }
         return parent;
@@ -103,15 +102,12 @@ public class TreeSet<T> implements Set<T> {
 
     public Node<T> findNode(Object pattern) {
         Node<T> current = root;
-        while (current.obj != pattern) {
-            if (comparator.compare(current.obj, (T) pattern) > 0) {
-                current = current.left;
-            } else {
-                current = current.right;
-            }
-            if (current == null) {
-                return null;
-            }
+        while (comparator.compare(current.obj, (T) pattern) != 0) {
+
+            if (comparator.compare(current.obj, (T) pattern) > 0) current = current.left;
+            else current = current.right;
+
+            if (current == null) return null;
         }
         return current;
     }
@@ -203,7 +199,9 @@ public class TreeSet<T> implements Set<T> {
         if (node.left != null && node.right == null) {
             //Change parent
             node.left.parent = node.parent;
-            if (node == node.parent.left) {
+            if (node == root) {
+                root = node.left;
+            } else if (node == node.parent.left) {
                 node.parent.left = node.left;
             } else if (node == node.parent.right) {
                 node.parent.right = node.left;

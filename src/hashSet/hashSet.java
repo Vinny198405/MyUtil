@@ -131,21 +131,6 @@ public class hashSet<T> implements Set<T> {
             }
             curTableInd++;
             return iterator == null ? null : iterator.next();
-//				for (int i = curInd; i < hashTable.length; i++) {
-//				list = hashTable[i];
-//				if (list != null) {
-//					if (iterator == null) {iterator = list.iterator();}
-//					if (iterator.hasNext()) {
-//						curInd = i;
-//						curTableInd++;
-//						return iterator.next();
-//					} else {
-//						curInd++;
-//						iterator = null;
-//					}
-//				}
-//			}
-//		return null;
         }
 
         @Override

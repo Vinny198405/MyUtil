@@ -4,19 +4,6 @@ import java.util.Arrays;
 
 public class ArrayInt {
 
-    public static void changeArr(int[] arr) {
-        int[] updArr = new int[arr.length + 1];
-        arr = updArr;
-        System.err.println(arr);
-    }
-
-    public static void printArray(int[] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + ",");
-        }
-        System.out.println();
-    }
-
     public static int[] insert1(int ar[], int index, int number) {
         int res[] = ar;
         res = new int[ar.length + 1];

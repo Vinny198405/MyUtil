@@ -187,6 +187,7 @@ public class TreeSet<T> implements Set<T> {
     }
 
     private void removeNonJunctionNode(Node<T> node) {
+        //remove root
         if (node.left == null && node.right == null && node.parent == null) {
             root = null;
         }
@@ -195,29 +196,21 @@ public class TreeSet<T> implements Set<T> {
             if (node == node.parent.left) node.parent.left = null;
             else node.parent.right = null;
         }
-        //Removing a node that has a left subtree but does not have a right subtree
-        if (node.left != null && node.right == null) {
-            //Change parent
-            node.left.parent = node.parent;
-            if (node == root) {
-                root = node.left;
-            } else if (node == node.parent.left) {
-                node.parent.left = node.left;
-            } else if (node == node.parent.right) {
-                node.parent.right = node.left;
-            }
-        }
-        //Removing a node that has a right subtree but does not have a left subtree
-        if (node.left == null && node.right != null) {
-            //Change parent
-            node.right.parent = node.parent;
-            if (node == root) {
-                root = node.right;
-            } else if (node == node.parent.left) {
-                node.parent.left = node.right;
-            } else if (node == node.parent.right) {
-                node.parent.right = node.right;
-            }
+        //Removing a node that has a left subtree
+        if (node.left != null) changeParent(node, node.left);
+
+        //Removing a node that has a right subtree
+        if (node.right != null) changeParent(node, node.right);
+    }
+
+    private void changeParent(Node<T> node, Node<T> changNode) {
+        changNode.parent = node.parent;  //Change parent
+        if (node == root) {
+            root = changNode;
+        } else if (node == node.parent.left) {
+            node.parent.left = changNode;
+        } else if (node == node.parent.right) {
+            node.parent.right = changNode;
         }
     }
 

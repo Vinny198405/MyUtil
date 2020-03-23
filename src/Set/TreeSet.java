@@ -22,7 +22,6 @@ public class TreeSet<T> implements Set<T> {
     Comparator<T> comparator;
     Node<T> root;
     int size;
-    Node<T> remCurNode;
 
     public TreeSet(Comparator<T> comparator) {
         this.comparator = comparator;
@@ -138,7 +137,7 @@ public class TreeSet<T> implements Set<T> {
 
     private class TreeSetIterator implements Iterator<T> {
         Node<T> current = getLeastNode(root);
-        Node<T> remove;
+        Node<T> removeNode;
 
         @Override
         public boolean hasNext() {
@@ -147,7 +146,7 @@ public class TreeSet<T> implements Set<T> {
 
         @Override
         public T next() {
-            remove = current;
+            removeNode = current;
             T res = current.obj;
             current = current.right != null ?
                     getLeastNode(current.right) :
@@ -158,11 +157,10 @@ public class TreeSet<T> implements Set<T> {
 
         @Override
         public void remove() {
-            removeNode(remove);
-            if (hasNext() && remCurNode != null) {
-                current = remCurNode;
+            removeNode(removeNode);
+            if (isJunction(removeNode)) {
+                current = removeNode;
             }
-            remCurNode = null;
         }
     }
 
@@ -185,7 +183,6 @@ public class TreeSet<T> implements Set<T> {
         if (isJunction(node)) {
             Node<T> substitute = getLeastNode(node.right);
             node.obj = substitute.obj;
-            remCurNode = node;
             node = substitute;
         }
         removeNonJunctionNode(node);

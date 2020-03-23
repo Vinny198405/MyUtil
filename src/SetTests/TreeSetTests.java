@@ -82,7 +82,17 @@ public class TreeSetTests {
         Integer[] oddNumbers = {11, 7, 13, 9, 15, 21, 121};
         assertTrue(set.removeIf(new EvenNumbersPredicate()));
         testSetArray(set, oddNumbers);
+    }
 
+    @Test
+    void testRemIf() {
+        for (int i = 0; i < 10000; i++) {
+            set.add((int) (Math.random() * Integer.MAX_VALUE));
+        }
+        assertTrue(set.removeIf(new EvenNumbersPredicate()));
+        for (int num : set) {
+            assertTrue(num % 2 == 1);
+        }
     }
 
     @Test

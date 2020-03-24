@@ -23,13 +23,13 @@ public class TreeSetAppl {
         while (itr.hasNext()) {
             System.out.print(itr.next() + " ");
         }
-        theTree.removeIf(new EvenNumbersPredicate());
-        System.out.println("Displaying the tree");
-        theTree.displayTree();
-
-        System.out.println("Inorder traversal");
-        theTree.inOrder(theTree.returnRoot());
-        System.out.println(" ");
+//        theTree.removeIf(new EvenNumbersPredicate());
+//        System.out.println("Displaying the tree");
+//        theTree.displayTree();
+//
+//        System.out.println("Inorder traversal");
+//        theTree.inOrder(theTree.returnRoot());
+//        System.out.println(" ");
 //
 //        System.out.println("Preorder traversal");
 //        theTree.preOrder(theTree.returnRoot());

@@ -34,7 +34,7 @@ public class hashSet<T> implements Set<T> {
         if (size > FACTOR * hashTable.length) {
             recreateHashTable();
         }
-        int index = getHashTabelIndex(obj);
+        int index = getHashTableIndex(obj);
         if (hashTable[index] == null) {
             hashTable[index] = new IndexedLinkedList<T>();
         }
@@ -72,24 +72,10 @@ public class hashSet<T> implements Set<T> {
     public Object remove(Object pattern) {
         if (!contains((T) pattern))
             return null;
-        int index = getHashTabelIndex((T) pattern);
+        int index = getHashTableIndex((T) pattern);
         hashTable[index].remove(pattern);
         size--;
         return pattern;
-    }
-
-    @Override
-    public boolean removeIf(Predicate<T> predicate) {
-        Iterator<T> itr = iterator();
-        boolean res = false;
-        while (itr.hasNext()) {
-            T obj = itr.next();
-            if (predicate.test(obj)) {
-                itr.remove();
-                res = true;
-            }
-        }
-        return res;
     }
 
     @Override
@@ -99,11 +85,11 @@ public class hashSet<T> implements Set<T> {
 
     @Override
     public boolean contains(T pattern) {
-        int index = getHashTabelIndex(pattern);
+        int index = getHashTableIndex(pattern);
         return hashTable[index] != null && hashTable[index].indexOf(pattern) >= 0;
     }
 
-    private int getHashTabelIndex(T pattern) {
+    private int getHashTableIndex(T pattern) {
         int hashCode = pattern.hashCode();
         int index = Math.abs(hashCode) % hashTable.length;
         return index;

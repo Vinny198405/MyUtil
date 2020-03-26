@@ -168,8 +168,10 @@ public class TreeSetTests {
             SortedSet<Integer> sortedSet = (SortedSet<Integer>) set;
             Integer[] lessThan10 = {2, -8, 7, 9};
             Integer[] lessThanEqual10 = {2, -8, 7, 9, 10};
+            Integer[] lessThanEqual25 = {2, -8, 7, 9, 10, 11, 13, 15, 20, 21};
             testSetArray(sortedSet.head(10, false), lessThan10);
             testSetArray(sortedSet.head(10, true), lessThanEqual10);
+            testSetArray(sortedSet.head(25, true), lessThanEqual25);
         }
     }
 
@@ -191,9 +193,15 @@ public class TreeSetTests {
             SortedSet<Integer> sortedSet = (SortedSet<Integer>) set;
             Integer[] openRange15_100 = {20, 70, 21};
             Integer[] closeRange15_100 = {20, 70, 21, 15, 100};
+            Integer[] closeRange50_150 = {70, 100, 121};
+            Integer[] closeRange90_500 = {100, 121, 500};
+            Integer[] closeRange121_500 = {121, 500};
             testSetArray(sortedSet.subset(15, false, 100, false), openRange15_100);
             testSetArray(sortedSet.subset(15, true, 100, true), closeRange15_100);
             testSetArray(sortedSet.subset(14, true, 110, true), closeRange15_100);
+            testSetArray(sortedSet.subset(50, true, 150, true), closeRange50_150);
+            testSetArray(sortedSet.subset(90, true, 500, true), closeRange90_500);
+            testSetArray(sortedSet.subset(100, false, 500, true), closeRange121_500);
         }
     }
 

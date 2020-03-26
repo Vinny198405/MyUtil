@@ -75,7 +75,7 @@ public class TreeSet<T> implements SortedSet<T> {
         this.comparator = comparator;
     }
 
-    @SuppressWarnings("unchecked")
+
     public TreeSet() {
         this((Comparator<T>) Comparator.naturalOrder());
     }

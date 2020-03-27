@@ -367,7 +367,7 @@ public class IndexedLinkedList<T> implements IndexedList<T> {
     }
 
     private void reverse(Node<T> nodeHead, Node<T> nodeTail) {
-        if (nodeHead == null || nodeHead.next == null) {
+        if (nodeHead == null || nodeHead.next == null || nodeTail == null || nodeTail.prev == null) {
             return;
         }
         reverse(nodeHead.next,nodeTail.prev);

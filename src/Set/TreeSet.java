@@ -25,7 +25,7 @@ public class TreeSet<T> implements SortedSet<T> {
     @Override
     public SortedSet<T> subset(T from, boolean isIncludedFrom, T to, boolean isIncludedTo) {
         Node<T> current = getFrom(from);
-        SortedSet<T> res = new TreeSet<T>();
+        SortedSet<T> res = new TreeSet<T>(comparator);
         int compRes;
         compRes = comparator.compare(current.obj, from);
         if (!isIncludedFrom && compRes == 0) current = getCurrent(current);

@@ -14,7 +14,6 @@ public class RecursionIntroductionTestAppl {
     //	1. No cycles; 2. Just + - operators
     private static int powHW(int a, int b) {
         if (b == 0) return 1;
-
         return sumPow(a, powHW(a, b - 1));
     }
 

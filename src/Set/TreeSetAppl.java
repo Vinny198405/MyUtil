@@ -44,8 +44,8 @@ public class TreeSetAppl {
 //        tree.rotatedTreeDisplay();
 //        System.out.printf("width = %d; height = %d\n",tree.width(), tree.height());
 //        theTree.separationTreeToLevel();
-        theTree.separationTreeToLevel();
-        tree.separationTreeToLevel();
+        theTree.printTree();
+        tree.printTree();
 
     }
 

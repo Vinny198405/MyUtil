@@ -287,7 +287,6 @@ public class TreeSet<T> implements SortedSet<T> {
         int max = height();
         addArray(root, 0);
         separationTreeToLevel(listPrint.get(0), 1, max);
-        printTree();
     }
 
     private void separationTreeToLevel(LinkedList<Node> list, int level, int max) {
@@ -310,6 +309,7 @@ public class TreeSet<T> implements SortedSet<T> {
     }
 
     public void printTree() {
+        separationTreeToLevel();
         int max = listPrint.size();
         for (int i = 0; i < max; i++) {
             List<Node> list = listPrint.get(i);

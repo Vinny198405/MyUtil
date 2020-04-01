@@ -364,11 +364,15 @@ public class IndexedLinkedList<T> implements IndexedList<T> {
     }
 
     private void reverse(Node<T> nodeHead, Node<T> nodeTail) {
-        if (nodeHead != null && nodeHead != nodeTail) {
+        if (nodeHead != nodeTail && nodeHead.prev != nodeTail) {
+            swap(nodeHead, nodeTail);
             reverse(nodeHead.next, nodeTail.prev);
         }
-        T temp = null;
-        temp = nodeHead.obj;
+
+    }
+
+    private void swap(Node<T> nodeHead, Node<T> nodeTail) {
+        T temp = nodeHead.obj;
         nodeHead.obj = nodeTail.obj;
         nodeTail.obj = temp;
     }

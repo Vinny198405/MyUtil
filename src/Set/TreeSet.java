@@ -75,7 +75,6 @@ public class TreeSet<T> implements SortedSet<T> {
         this.comparator = comparator;
     }
 
-
     public TreeSet() {
         this((Comparator<T>) Comparator.naturalOrder());
     }
@@ -239,77 +238,99 @@ public class TreeSet<T> implements SortedSet<T> {
         return node.left != null && node.right != null;
     }
 
-    public void displayTree() {
-        Stack globalStack = new Stack();
-        globalStack.push(root);
-        int emptyLeaf = 32;
-        boolean isRowEmpty = false;
-        System.out.println("****......................................................****");
-        while (isRowEmpty == false) {
-            Stack localStack = new Stack();
-            isRowEmpty = true;
-            for (int j = 0; j < emptyLeaf; j++)
-                System.out.print(' ');
-            while (globalStack.isEmpty() == false) {
-                Node temp = (Node) globalStack.pop();
-                if (temp != null) {
-                    System.out.print(temp.obj);
-                    localStack.push(temp.left);
-                    localStack.push(temp.right);
-                    if (temp.left != null || temp.right != null)
-                        isRowEmpty = false;
-                } else {
-                    System.out.print("--");
-                    localStack.push(null);
-                    localStack.push(null);
-                }
-                for (int j = 0; j < emptyLeaf * 2 - 2; j++)
-                    System.out.print(' ');
+    public int height() {
+        return height(root);
+    }
+
+    private int height(Node<T> root) {
+        int res = 0;
+        if (root != null) {
+            int heightRight = height(root.right);
+            int heightLeft = height(root.left);
+            res = 1 + Math.max(heightLeft, heightRight);
+        }
+        return res;
+    }
+
+    public int width() {
+        return width(root);
+    }
+
+    private int width(Node<T> root) {
+        if (root == null) return 0;
+        if (root.left == null && root.left == null) return 1;
+        return width(root.left) + width(root.right);
+    }
+
+    public void rotatedTreeDisplay() {
+        rotatedDisplay(root, 1);
+    }
+
+    private void rotatedDisplay(Node<T> root, int level) {
+        if (root != null) {
+            rotatedDisplay(root.right, level + 1);
+            displayRoot(root, level);
+            rotatedDisplay(root.left, level + 1);
+        }
+    }
+
+    private void displayRoot(Node<T> root, int level) {
+        for (int i = 0; i < level * 2; i++) {
+            System.out.print(" ");
+        }
+        System.out.println(root.obj);
+    }
+
+    //******* HW Print Tree ***************
+    ArrayList<LinkedList<Node>> listPrint = new ArrayList<>();
+    public void separationTreeToLevel() {
+        int max = height();
+        addArray(root, 0);
+        separationTreeToLevel(listPrint.get(0), 1, max);
+        printTree();
+    }
+
+    private void separationTreeToLevel(LinkedList<Node> list, int level, int max) {
+        for (Node tempNode : list) {
+            if (max > 1) {
+                addArray(tempNode == null ? null : tempNode.left, level);
+                addArray(tempNode == null ? null : tempNode.right, level);
+            }
+        }
+        if (max > 1) {
+            separationTreeToLevel(listPrint.get(level), level + 1, max - 1);
+        }
+    }
+
+    private void addArray(Node<T> node, int level) {
+        if (listPrint.size() <= level) listPrint.add(level, new LinkedList<Node>());
+        if (node == null) {
+            listPrint.get(level).add(null);
+        } else listPrint.get(level).add(node);
+    }
+
+    public void printTree() {
+        int max = listPrint.size();
+        for (int i = 0; i < max; i++) {
+            List<Node> list = listPrint.get(i);
+            printSpaceBefore(max - i);
+            for (Node nodeTemp : list) {
+                System.out.print(nodeTemp == null ? "-" : nodeTemp.obj);
+                printSpaceAfter(max - i);
             }
             System.out.println();
-            emptyLeaf /= 2;
-            while (localStack.isEmpty() == false)
-                globalStack.push(localStack.pop());
-        }
-        System.out.println("****......................................................****");
-    }
-
-    public void preOrder(Node Root) {
-        if (Root != null) {
-            System.out.print(Root.obj + " ");
-            preOrder(Root.left);
-            preOrder(Root.right);
         }
     }
 
-    public void inOrder(Node Root) {
-        if (Root != null) {
-            inOrder(Root.left);
-            System.out.print(Root.obj + " ");
-            inOrder(Root.right);
+    private void printSpaceBefore(int max) {
+        for (int i = 0; i < Math.pow(2,max-1); i++) {
+            System.out.print(" ");
         }
     }
 
-    public void postOrder(Node Root) {
-        if (Root != null) {
-            postOrder(Root.left);
-            postOrder(Root.right);
-            System.out.print(Root.obj + " ");
+    private void printSpaceAfter(int max) {
+        for (int i = 0; i < Math.pow(2,max-1)*2-1; i++) {
+            System.out.print(" ");
         }
     }
-
-    public void byLevel(Node root) {
-        Queue<Node> level = new LinkedList<>();
-        level.add(root);
-
-        while (!level.isEmpty()) {
-            Node node = level.poll();
-            System.out.print(node.obj + " ");
-            if (node.left != null)
-                level.add(node.left);
-            if (node.right != null)
-                level.add(node.right);
-        }
-    }
-
 }

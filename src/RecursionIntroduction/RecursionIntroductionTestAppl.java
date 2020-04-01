@@ -26,7 +26,7 @@ public class RecursionIntroductionTestAppl {
     //	1. No cycles, 2. just + - operators, 3. No additional functions
 
     public static int square(int x) {
-        if (x == 1) return 1;
+        if (x == 0) return 0;
         return x + x - 1 + square(x - 1);
     }
 

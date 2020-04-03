@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.function.Predicate;
 
 import SortedSet.SortedSet;
+import TreePresentation.TreePresentation;
 
 public class TreeSet<T> implements SortedSet<T> {
     @Override
@@ -62,14 +63,14 @@ public class TreeSet<T> implements SortedSet<T> {
         Node<T> left; //reference to a less (relative to comparator)
         Node<T> right; // reference to a greater
 
-        public Node(T obj) {
+        Node(T obj) {
             this.obj = obj;
         }
     }
 
-    Comparator<T> comparator;
-    Node<T> root;
-    int size;
+    private Comparator<T> comparator;
+    private Node<T> root;
+    private int size;
 
     public TreeSet(Comparator<T> comparator) {
         this.comparator = comparator;
@@ -258,7 +259,7 @@ public class TreeSet<T> implements SortedSet<T> {
 
     private int width(Node<T> root) {
         if (root == null) return 0;
-        if (root.left == null && root.left == null) return 1;
+        if (root.left == null && root.right == null) return 1;
         return width(root.left) + width(root.right);
     }
 
@@ -282,9 +283,9 @@ public class TreeSet<T> implements SortedSet<T> {
     }
 
     //******* HW Print Tree ***************
-    ArrayList<LinkedList<Node>> listPrint;
+    private ArrayList<LinkedList<Node>> listPrint;
 
-    public void separationTreeToLevel() {
+    private void separationTreeToLevel() {
         listPrint = new ArrayList<>();
         int max = height();
         addArray(root, 0);
@@ -333,6 +334,57 @@ public class TreeSet<T> implements SortedSet<T> {
     private void printSpaceAfter(int max) {
         for (int i = 0; i < Math.pow(2, max - 1) * 2 - 1; i++) {
             System.out.print(" ");
+        }
+    }
+
+    // CW *********************
+    private int seqNumber;
+    public TreePresentation<T> getTreePresentation() {
+        TreePresentation<T> res = new TreePresentation<T>();
+        ArrayList<ArrayList<TreePresentation.Node<T>>> levels = new ArrayList<>();
+        seqNumber = 0;
+        int nLevels = height();
+        for (int i = 0; i < nLevels; i++) {
+            levels.add(new ArrayList<>());
+        }
+        fillLevelsPresentation(root, 0, levels);
+        res.levelsNodes = levels;
+        return res;
+    }
+
+    private void fillLevelsPresentation(Node<T> root, int level,
+                                        ArrayList<ArrayList<TreePresentation.Node<T>>> levels) {
+        if (root != null) {
+            fillLevelsPresentation(root.left, level + 1, levels);
+            TreePresentation.Node<T> node = new TreePresentation.Node<>();
+            node.obj = root.obj;
+            node.seqNumber = seqNumber++;
+            levels.get(level).add(node);
+            fillLevelsPresentation(root.right, level + 1, levels);
+        }
+    }
+
+    public void balance() {
+        ArrayList<Node<T>> arrayNodes = new ArrayList<>(size);
+        fillArrayNodes(arrayNodes, root); //fills array of the nodes
+        root = balance(arrayNodes, 0, size - 1);
+    }
+
+    private Node<T> balance(ArrayList<Node<T>> arrayNodes, int start, int end) {
+        // base case
+        if (start > end) return null;
+        int mid = (start + end) / 2;
+        Node<T> node = arrayNodes.get(mid);
+        node.left = balance(arrayNodes, start, mid - 1);
+        node.right = balance(arrayNodes, mid + 1, end);
+        return node;
+    }
+
+    private void fillArrayNodes(ArrayList<Node<T>> arrayNodes, Node<T> root) {
+        if (root != null) {
+            fillArrayNodes(arrayNodes, root.left);
+            arrayNodes.add(root);
+            fillArrayNodes(arrayNodes, root.right);
         }
     }
 }

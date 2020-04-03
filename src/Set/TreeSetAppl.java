@@ -5,7 +5,7 @@ import TreePresentation.TreePresentation;
 public class TreeSetAppl {
 
     public static void main(String[] args) throws Exception {
-        Integer[] numbers = {10, -8, 7, 9, 100, 13, 20, 11, 2, 70, 15, 21, 121, 500};
+        Integer[] numbers = {10, -8, 7, 9, 100, 13, 20, 11, 2, 70, 15, 21, 121, 500,600,650,700,800,900,1000};
         Integer[] numbers1 = {2, 7, 10, 13, 20, 11, 100, 70, 15, 21, 121, -8, 9, 500};
         TreeSet theTree = new TreeSet<Integer>();
         for (Integer number : numbers) {
@@ -13,17 +13,16 @@ public class TreeSetAppl {
         }
 
         TreeSet tree = new TreeSet<Integer>();
-        TreeSetRandom(tree, 0, 100, 30);
+        TreeSetRandom(tree, 0, 1000, 100);
 //        tree.rotatedTreeDisplay();
-        System.out.printf("width = %d; height = %d\n",tree.width(), tree.height());
+//        System.out.printf("width = %d; height = %d\n", theTree.width(), theTree.height());
 //        theTree.separationTreeToLevel();
         //    theTree.printTree();
-        //    theTree.add(600);
-        //   theTree.printTree();
-        tree.balance();
-        tree.printTree();
-       // theTree.balance();
-       // theTree.printTree();
+        //theTree.printTree();
+        // tree.balance();
+        //tree.printTree();
+        // theTree.balance();
+        // theTree.printTree();
         TreePresentation<Integer> treePresentation = tree.getTreePresentation();
         System.out.println(treePresentation);
     }

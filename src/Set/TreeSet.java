@@ -116,12 +116,18 @@ public class TreeSet<T> implements SortedSet<T> {
     private Node<T> getParent(T obj) {
         Node<T> current = root;
         Node<T> parent = null;
-
+        int log1 = 0;
+        int log2 = (size / 4) + (31 - Integer.numberOfLeadingZeros(size));
         while (current != null) {
             parent = current;
             int cmp = comparator.compare(obj, current.obj);
             if (cmp == 0) return null;
             current = cmp < 0 ? current.left : current.right;
+            log1++;
+        }
+        if (size > 3 && log1 > log2) {
+            balance();
+            getParent(obj);
         }
         return parent;
     }
@@ -339,6 +345,7 @@ public class TreeSet<T> implements SortedSet<T> {
 
     // CW *********************
     private int seqNumber;
+
     public TreePresentation<T> getTreePresentation() {
         TreePresentation<T> res = new TreePresentation<T>();
         ArrayList<ArrayList<TreePresentation.Node<T>>> levels = new ArrayList<>();
@@ -363,6 +370,7 @@ public class TreeSet<T> implements SortedSet<T> {
             fillLevelsPresentation(root.right, level + 1, levels);
         }
     }
+
     // ***************** HW balance tree **********************
     public void balance() {
         ArrayList<Node<T>> arrayNodes = new ArrayList<>(size);

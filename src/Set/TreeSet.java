@@ -282,8 +282,10 @@ public class TreeSet<T> implements SortedSet<T> {
     }
 
     //******* HW Print Tree ***************
-    ArrayList<LinkedList<Node>> listPrint = new ArrayList<>();
+    ArrayList<LinkedList<Node>> listPrint;
+
     public void separationTreeToLevel() {
+        listPrint = new ArrayList<>();
         int max = height();
         addArray(root, 0);
         separationTreeToLevel(listPrint.get(0), 1, max);
@@ -323,13 +325,13 @@ public class TreeSet<T> implements SortedSet<T> {
     }
 
     private void printSpaceBefore(int max) {
-        for (int i = 0; i < Math.pow(2,max-1); i++) {
+        for (int i = 0; i < Math.pow(2, max - 1); i++) {
             System.out.print(" ");
         }
     }
 
     private void printSpaceAfter(int max) {
-        for (int i = 0; i < Math.pow(2,max-1)*2-1; i++) {
+        for (int i = 0; i < Math.pow(2, max - 1) * 2 - 1; i++) {
             System.out.print(" ");
         }
     }

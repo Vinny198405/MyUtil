@@ -45,8 +45,9 @@ public class TreeSetAppl {
 //        System.out.printf("width = %d; height = %d\n",tree.width(), tree.height());
 //        theTree.separationTreeToLevel();
         theTree.printTree();
-        tree.printTree();
-
+        theTree.add(600);
+        theTree.printTree();
+       // tree.printTree();
     }
 
     static void TreeSetRandom(TreeSet<Integer> tree, int min, int max, int count) {

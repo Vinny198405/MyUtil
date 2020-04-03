@@ -363,20 +363,19 @@ public class TreeSet<T> implements SortedSet<T> {
             fillLevelsPresentation(root.right, level + 1, levels);
         }
     }
-
+    // ***************** HW balance tree **********************
     public void balance() {
         ArrayList<Node<T>> arrayNodes = new ArrayList<>(size);
         fillArrayNodes(arrayNodes, root); //fills array of the nodes
         root = balance(arrayNodes, 0, size - 1);
     }
 
-    private Node<T> balance(ArrayList<Node<T>> arrayNodes, int start, int end) {
-        // base case
-        if (start > end) return null;
-        int mid = (start + end) / 2;
+    private Node<T> balance(ArrayList<Node<T>> arrayNodes, int left, int right) {
+        if (left > right) return null;
+        int mid = (left + right) / 2;
         Node<T> node = arrayNodes.get(mid);
-        node.left = balance(arrayNodes, start, mid - 1);
-        node.right = balance(arrayNodes, mid + 1, end);
+        node.left = balance(arrayNodes, left, mid - 1);
+        node.right = balance(arrayNodes, mid + 1, right);
         return node;
     }
 

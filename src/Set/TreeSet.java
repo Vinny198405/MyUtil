@@ -116,20 +116,35 @@ public class TreeSet<T> implements SortedSet<T> {
     private Node<T> getParent(T obj) {
         Node<T> current = root;
         Node<T> parent = null;
-        int log1 = 0;
-        int log2 = (size / 4) + (31 - Integer.numberOfLeadingZeros(size));
+
         while (current != null) {
             parent = current;
             int cmp = comparator.compare(obj, current.obj);
             if (cmp == 0) return null;
             current = cmp < 0 ? current.left : current.right;
-            log1++;
         }
-        if (size > 3 && log1 > log2) {
+
+        if (size > 5 && !isBalanced(this.root)) {
             balance();
             getParent(obj);
         }
         return parent;
+    }
+
+    private boolean isBalanced(Node<T> root) {
+        return checkBalance(root) != -1;
+    }
+
+    private int checkBalance(Node<T> node) {
+        int log2 = 31 - Integer.numberOfLeadingZeros(size);
+        if (node == null) return 0;
+        int left = checkBalance(node.left);
+        int right = checkBalance(node.right);
+        if (Math.abs(left - right) > log2) {
+            return -1;
+        } else {
+            return 1 + Math.max(left, right);
+        }
     }
 
     @Override
@@ -381,7 +396,8 @@ public class TreeSet<T> implements SortedSet<T> {
     private Node<T> balance(ArrayList<Node<T>> arrayNodes, int left, int right) {
         if (left > right) return null;
         int mid = (left + right) / 2;
-        Node<T> node = arrayNodes.get(mid);
+        Node<T> node;
+        node = arrayNodes.get(mid);
         node.left = balance(arrayNodes, left, mid - 1);
         node.right = balance(arrayNodes, mid + 1, right);
         return node;

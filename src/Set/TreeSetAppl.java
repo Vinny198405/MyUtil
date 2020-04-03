@@ -6,20 +6,20 @@ public class TreeSetAppl {
 
     public static void main(String[] args) throws Exception {
         Integer[] numbers = {10, -8, 7, 9, 100, 13, 20, 11, 2, 70, 15, 21, 121, 500,600,650,700,800,900,1000};
-        Integer[] numbers1 = {2, 7, 10, 13, 20, 11, 100, 70, 15, 21, 121, -8, 9, 500};
+        Integer[] numbers1 = {1, 2, 3, 4, 5,6, 7, 8, 9, 10, 11, 12, 13, 14};
         TreeSet theTree = new TreeSet<Integer>();
-        for (Integer number : numbers) {
+        for (Integer number : numbers1) {
             theTree.add(number);
         }
 
         TreeSet tree = new TreeSet<Integer>();
-        TreeSetRandom(tree, 0, 1000, 100);
+        TreeSetRandom(tree, 0, 500, 50);
 //        tree.rotatedTreeDisplay();
 //        System.out.printf("width = %d; height = %d\n", theTree.width(), theTree.height());
 //        theTree.separationTreeToLevel();
         //    theTree.printTree();
         //theTree.printTree();
-        // tree.balance();
+        //tree.balance();
         //tree.printTree();
         // theTree.balance();
         // theTree.printTree();

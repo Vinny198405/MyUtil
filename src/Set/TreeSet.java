@@ -116,31 +116,45 @@ public class TreeSet<T> implements SortedSet<T> {
     private Node<T> getParent(T obj) {
         Node<T> current = root;
         Node<T> parent = null;
+        int iterations = 0;
 
         while (current != null) {
             parent = current;
             int cmp = comparator.compare(obj, current.obj);
             if (cmp == 0) return null;
             current = cmp < 0 ? current.left : current.right;
+            iterations++;
         }
 
-        if (size > 5 && !isBalanced(this.root)) {
+        if (!checkBalanced(iterations)) {
             balance();
             getParent(obj);
         }
         return parent;
     }
 
-    private boolean isBalanced(Node<T> root) {
-        return checkBalance(root) != -1;
+    private boolean checkBalanced(int iterations){
+        boolean res = true;
+        double checkBal = 0;
+        int log2 = (31 - Integer.numberOfLeadingZeros(size));
+        if (log2 != 0) {
+            checkBal = iterations / log2;
+        }
+        if (size > 3 && checkBal > 1.2) {
+            res = false;
+        }
+        return res;
     }
 
-    private int checkBalance(Node<T> node) {
-        int log2 = 31 - Integer.numberOfLeadingZeros(size);
+    public boolean isBalanced() {
+        return isBalanced(root) != -1;
+    }
+
+    private int isBalanced(Node<T> node) {
         if (node == null) return 0;
-        int left = checkBalance(node.left);
-        int right = checkBalance(node.right);
-        if (Math.abs(left - right) > log2) {
+        int left = isBalanced(node.left);
+        int right = isBalanced(node.right);
+        if (Math.abs(left - right) > 1) {
             return -1;
         } else {
             return 1 + Math.max(left, right);
@@ -390,16 +404,17 @@ public class TreeSet<T> implements SortedSet<T> {
     public void balance() {
         ArrayList<Node<T>> arrayNodes = new ArrayList<>(size);
         fillArrayNodes(arrayNodes, root); //fills array of the nodes
-        root = balance(arrayNodes, 0, size - 1);
+        root = balance(arrayNodes, 0, size - 1, null);
     }
 
-    private Node<T> balance(ArrayList<Node<T>> arrayNodes, int left, int right) {
+    private Node<T> balance(ArrayList<Node<T>> arrayNodes, int left, int right, Node<T> root) {
         if (left > right) return null;
         int mid = (left + right) / 2;
         Node<T> node;
         node = arrayNodes.get(mid);
-        node.left = balance(arrayNodes, left, mid - 1);
-        node.right = balance(arrayNodes, mid + 1, right);
+        node.parent = root;
+        node.left = balance(arrayNodes, left, mid - 1, node);
+        node.right = balance(arrayNodes, mid + 1, right, node);
         return node;
     }
 

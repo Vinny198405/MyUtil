@@ -23,4 +23,6 @@ public interface SortedSet<T> extends Set<T> {
     TreePresentation<T> getTreePresentation();
 
     void printTree();
+
+    boolean isBalanced();
 }

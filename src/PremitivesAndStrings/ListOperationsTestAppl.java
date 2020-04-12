@@ -9,8 +9,8 @@ public class ListOperationsTestAppl {
     private static IndexedListOperations linkedTest;
 
     public static void main(String[] args) {
-        Integer nRuns = 1000;
-        int nNumber = 10000;
+        Integer nRuns = 10000;
+        int nNumber = 100000;
         arrayTest = new IndexedListOperations("Array", nRuns,
                 new Array<Integer>(), nNumber);
         linkedTest = new IndexedListOperations("LinkedList", nRuns,

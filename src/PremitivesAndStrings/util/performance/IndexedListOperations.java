@@ -41,7 +41,7 @@ public class IndexedListOperations extends PerformanceTests {
     }
 
     private int getRandomIndex(int num) {
-        return (int) (num * Math.random());
+        return (int) (Math.random()*(num-1));
     }
 
     public void setProbGet(int probGet) {

@@ -22,10 +22,12 @@ public class ListOperationsTestAppl {
     }
 
     private static void performanceTest(int probGet) {
+        System.out.println("probGet: " + probGet);
         arrayTest.setProbGet(probGet);
         arrayTest.run();
         linkedTest.setProbGet(probGet);
         linkedTest.run();
+
     }
 }
 

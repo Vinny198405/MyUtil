@@ -25,8 +25,8 @@ public class IndexedListOperations extends PerformanceTests {
     protected void runTest() {
         if (probGet > getRandomIndex(100)) {
             runGetAtIRandomIndex();
+            runGetAtIRandomIndex();
         } else {
-            runRemoveAddFirst();
             runRemoveAddFirst();
         }
     }

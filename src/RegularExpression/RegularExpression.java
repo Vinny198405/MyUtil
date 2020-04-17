@@ -31,7 +31,7 @@ class RegularExpression {
     }
 
     static String email() {
-        return "[^\\s,@]*@[a-zA-Z0-9]+(-?[a-zA-Z0-9])*(\\.[a-zA-Z](-?[a-zA-Z])*[a-zA-Z]?){1,3}";
+        return "[^\\p{Space},@]*@[\\p{Alpha}]+(-?[\\p{Alpha}])*(\\.[\\p{Alpha}](-?[\\p{Alpha}])*[\\p{Alpha}]?){1,3}";
     }
 
     static String arithmeticExpression() {

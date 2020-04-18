@@ -35,6 +35,6 @@ class RegularExpression {
     }
 
     static String arithmeticExpression() {
-        return "\\s*([0-9]\\s*[\\+\\-\\*\\/]?\\s*)*;?\\s*";
+        return "\\s*\\d{1,13}(\\s*[-+*/]\\s*\\d{1,13}\\s*)*;?\\s*";
     }
 }

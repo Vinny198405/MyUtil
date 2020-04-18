@@ -49,6 +49,7 @@ class RegularExpressionTest {
         assertTrue("255.255.255.255".matches(ipV4()));
         //assertFalse tests
         assertFalse("280.1.2.3".matches(ipV4()));
+        assertFalse("240.1.2".matches(ipV4()));
         assertFalse("0.1.2".matches(ipV4()));
         assertFalse("*.1.2.3".matches(ipV4()));
         assertFalse("255.1.2.+3".matches(ipV4()));
@@ -88,7 +89,7 @@ class RegularExpressionTest {
     @Test
     void arithmeticExpressionTest() {
         //assertTrue tests
-        assertTrue("2+3 /7".matches(arithmeticExpression()));
+        assertTrue("  2 + 3 / 7  ".matches(arithmeticExpression()));
         assertTrue("2* 3;".matches(arithmeticExpression()));
         assertTrue("2".matches(arithmeticExpression()));
         assertTrue("2 + 3 / 7".matches(arithmeticExpression()));

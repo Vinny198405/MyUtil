@@ -74,14 +74,14 @@ class ArithmeticExpressionsTests {
 
     @Test
     void testBrackets() {
-        assertTrue(Calculator.checkBrackets("()"));
-        assertTrue(Calculator.checkBrackets("(())"));
-        assertTrue(Calculator.checkBrackets("(()())"));
+        assertTrue(Calculator.checkBrackets("(5+5)"));
+        assertTrue(Calculator.checkBrackets("((10-5)+(2+2))"));
+        assertTrue(Calculator.checkBrackets("((5)+(5))"));
 
-        assertFalse(Calculator.checkBrackets("()))("));
-        assertFalse(Calculator.checkBrackets("())"));
-        assertFalse(Calculator.checkBrackets("(()"));
-        assertFalse(Calculator.checkBrackets("())"));
-        assertFalse(Calculator.checkBrackets("(()()"));
+        assertFalse(Calculator.checkBrackets("(5*3)-2)-3)*2(/5"));
+        assertFalse(Calculator.checkBrackets("(5-2)*2)"));
+        assertFalse(Calculator.checkBrackets("(10/(2+2)"));
+        assertFalse(Calculator.checkBrackets("(8*3)/2)"));
+        assertFalse(Calculator.checkBrackets("((5*5)/(2*2)"));
     }
 }

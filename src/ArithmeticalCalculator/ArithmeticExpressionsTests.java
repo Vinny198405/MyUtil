@@ -46,6 +46,7 @@ class ArithmeticExpressionsTests {
         assertEquals(Double.POSITIVE_INFINITY, calculate("2+5/0"));
         assertEquals(Double.NaN, calculate("*10 -5 *2 / 3"));
         assertEquals(Double.NaN, calculate("2*10 -5 * 2 # 3"));
+        assertEquals(Double.NaN, calculate("3.5 2.5 1.2+ +"));
     }
 
     @Test
@@ -78,6 +79,7 @@ class ArithmeticExpressionsTests {
         assertTrue(Calculator.checkBrackets("((10-5)+(2+2))"));
         assertTrue(Calculator.checkBrackets("((5)+(5))"));
 
+        assertFalse(Calculator.checkBrackets("((()())))("));
         assertFalse(Calculator.checkBrackets("(5*3)-2)-3)*2(/5"));
         assertFalse(Calculator.checkBrackets("(5-2)*2)"));
         assertFalse(Calculator.checkBrackets("(10/(2+2)"));

@@ -34,27 +34,20 @@ public class Calculator {
     }
 
     public static String[] getOperations(String expr) {
-        return expr.split("[\\d. ]+");
+        String tmp = expr.replaceAll(" ", "");
+        return tmp.split("[\\d.]+");
     }
 
     public static String[] getOperandsDouble(String expr) {
         return expr.trim().split("[-+/* ]+");
     }
 
-    public static Boolean checkBrackets(String expr) {
-        String brackets = expr.replaceAll("[^()]", "");
-
-        if (brackets.length() % 2 != 0) return false;
-
-        String bracketsTemp = "";
-        while (true) {
-            bracketsTemp = brackets.replaceAll("\\(\\)", "");
-            if (brackets.equals(bracketsTemp)) {
-                break;
-            }
-            brackets = bracketsTemp;
+    public static boolean checkBrackets(String expr) {
+        int count = 0;
+        for (char c : expr.toCharArray()) {
+            if (c == '(') count++;
+            if (c == ')' && --count < 0) break;
         }
-
-        return brackets.length() == 0;
+        return count == 0;
     }
 }

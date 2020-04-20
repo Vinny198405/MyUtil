@@ -43,6 +43,9 @@ public class Calculator {
 
     public static Boolean checkBrackets(String expr) {
         String brackets = expr.replaceAll("[^()]", "");
+
+        if (brackets.length() % 2 != 0) return false;
+
         String bracketsTemp = "";
         while (true) {
             bracketsTemp = brackets.replaceAll("\\(\\)", "");

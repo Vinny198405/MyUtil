@@ -28,8 +28,10 @@ public class Generator {
             number = (int) (max * Math.random());
             try {
                 rule.checkRule(number, min, max);
-                result[index++] = number;
-            } catch (RuleException ignored) {}
+            } catch (RuleException e) {
+                number += e.getDelta();
+            }
+            result[index++] = number;
         }
 
         return result;

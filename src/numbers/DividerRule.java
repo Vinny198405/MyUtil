@@ -41,6 +41,10 @@ public class DividerRule implements Rule {
         if (number > max) return max - number;
         if (number < min) return min - number;
 
-        return -(number % divider);
+        int modulo = -(number % divider);
+        int delta = divider + modulo;
+        if (-modulo < delta) {
+            return modulo;
+        }else return delta;
     }
 }

@@ -20,7 +20,7 @@ public class Length {
     }
 
     public Length convert(LengthUnit lengthUnit) {
-        return new Length(number * unit.getValue() / lengthUnit.getValue(), lengthUnit);
+        return new Length(makeNumber() / lengthUnit.getValue(), lengthUnit);
     }
 
     public float makeNumber() {

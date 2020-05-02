@@ -35,7 +35,7 @@ public class DateTimeOperationsAppl {
 
         long days = ChronoUnit.DAYS.between(birthDate, date);
 
-        System.out.printf("Years: %d; Months: %d; Days: %d;\n", years, months, days);
+        System.out.printf("Years: %d; Months: %d; Days: %d; from date: %s\n", years, months, days, strBirthDate);
     }
 
     private static LocalDate formatCheck(String strBirthDate) {

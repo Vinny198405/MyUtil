@@ -1,7 +1,6 @@
 package DateTimeIntroduction;
 
 import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.time.temporal.*;
 import java.util.Collections;
 import java.util.HashSet;

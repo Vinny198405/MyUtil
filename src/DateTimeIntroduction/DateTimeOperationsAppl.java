@@ -1,11 +1,7 @@
 package DateTimeIntroduction;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.time.temporal.ChronoUnit;
+import java.time.*;
+import java.time.format.*;
 
 public class DateTimeOperationsAppl {
     public static void main(String[] args) {
@@ -24,18 +20,11 @@ public class DateTimeOperationsAppl {
     }
 
     private static void displayCompleteAge(String strBirthDate) {
-        LocalDate birthDate = formatCheck(strBirthDate);
-        LocalDate date = LocalDate.now();
+        LocalDate start = formatCheck(strBirthDate);
+        LocalDate end = LocalDate.now();
 
-        long years = ChronoUnit.YEARS.between(birthDate, date);
-        date = date.minus(years, ChronoUnit.YEARS);
-
-        long months = ChronoUnit.MONTHS.between(birthDate, date);
-        date = date.minus(months, ChronoUnit.MONTHS);
-
-        long days = ChronoUnit.DAYS.between(birthDate, date);
-
-        System.out.printf("Years: %d; Months: %d; Days: %d; from date: %s\n", years, months, days, strBirthDate);
+        Period period = Period.between(start, end);
+        System.out.printf("Years: %d; Months: %d; Days: %d; from date: %s\n", period.getYears(), period.getMonths(), period.getDays(), strBirthDate);
     }
 
     private static LocalDate formatCheck(String strBirthDate) {
@@ -52,14 +41,15 @@ public class DateTimeOperationsAppl {
                 if (count >= formats.length) throw e;
             }
         }
-
         return birthDate;
     }
 
     private static void displayTimezoneId(String zonePattern) {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("hh:mma VV");
         for (String zoneID : ZoneId.getAvailableZoneIds()) {
             if (zoneID.toLowerCase().contains(zonePattern.toLowerCase())) {
-                System.out.println(ZonedDateTime.now(ZoneId.of(zoneID)));
+                ZonedDateTime ztm = ZonedDateTime.now(ZoneId.of(zoneID));
+                System.out.println(ztm.format(format));
             }
         }
     }

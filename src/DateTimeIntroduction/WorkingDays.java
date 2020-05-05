@@ -1,6 +1,8 @@
 package DateTimeIntroduction;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.*;
 import java.util.Collections;
 import java.util.HashSet;
@@ -12,9 +14,12 @@ public class WorkingDays implements TemporalAdjuster {
 
     @Override
     public Temporal adjustInto(Temporal temporal) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(temporal.toString());
+        String newData = date.format(formatter);
         int current = 0;
         while (current != workDays) {
-            if (checkDays(temporal.toString()) || temporal.get(ChronoField.DAY_OF_WEEK) == DayOfWeek.SATURDAY.getValue() || temporal.get(ChronoField.DAY_OF_WEEK) == DayOfWeek.FRIDAY.getValue()) {
+            if (checkDays(newData) || temporal.get(ChronoField.DAY_OF_WEEK) == DayOfWeek.SATURDAY.getValue() || temporal.get(ChronoField.DAY_OF_WEEK) == DayOfWeek.FRIDAY.getValue()) {
                 temporal = temporal.plus(1, ChronoUnit.DAYS);
             } else {
                 current++;

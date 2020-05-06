@@ -2,7 +2,7 @@ package NumbersBox;
 
 import java.util.*;
 
-public class LinkedListNumbersBox extends ArrayListAndLinkedListNumberBox {
+public class LinkedListNumbersBox extends CollectionNumberBox {
 
     @Override
     Collection<Integer> setCollection() {

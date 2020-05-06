@@ -9,9 +9,4 @@ public class TreeSetNumbersBox extends CollectionNumberBox{
     Collection<Integer> setCollection() {
         return new TreeSet<>();
     }
-
-    @Override
-    public int removeRepeated() {
-        return 0;
-    }
 }

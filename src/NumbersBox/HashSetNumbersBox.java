@@ -8,9 +8,4 @@ public class HashSetNumbersBox extends CollectionNumberBox {
     Collection<Integer> setCollection() {
         return new HashSet<>();
     }
-
-    @Override
-    public int removeRepeated() {
-        return 0;
-    }
 }

@@ -44,4 +44,15 @@ public abstract class CollectionNumberBox implements NumbersBox {
     public Iterator<Integer> iterator() {
         return collection.iterator();
     }
+
+    @Override
+    public int removeRepeated() {
+        if ((collection instanceof ArrayList) || collection instanceof LinkedList) {
+            int count = collection.size();
+            Set<Integer> set = new LinkedHashSet<>(collection);
+            collection.clear();
+            collection.addAll(set);
+            return count - collection.size();
+        } else return 0;
+    }
 }

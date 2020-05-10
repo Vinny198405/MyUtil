@@ -7,12 +7,12 @@ public class Anagram {
         if (word.length() != anagram.length()) {
             return false;
         }
-        return sort(word).equals(sort(anagram));
-    }
-
-    public static String sort(String str) {
-        char[] content = str.toCharArray();
-        Arrays.sort(content);
-        return new String(content);
+        char [] tempSource = word.toCharArray();
+        char [] tempRevers = anagram.toCharArray();
+        int summ = 0;
+        for (int i = 0; i < tempSource.length; i++) {
+            summ += tempSource[i] - tempRevers[tempSource.length - 1 - i];
+        }
+        return summ == 0;
     }
 }

@@ -7,11 +7,11 @@ public class Anagram {
         if (word.length() != anagram.length()) {
             return false;
         }
-        char [] tempSource = word.toCharArray();
-        char [] tempRevers = anagram.toCharArray();
+        char [] tempWord = word.toCharArray();
+        char [] tempAnagram = anagram.toCharArray();
         int summ = 0;
-        for (int i = 0; i < tempSource.length; i++) {
-            summ += tempSource[i] - tempRevers[i];
+        for (int i = 0; i < tempWord.length; i++) {
+            summ += tempWord[i] - tempAnagram[i];
         }
         return summ == 0;
     }

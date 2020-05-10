@@ -11,7 +11,7 @@ public class Anagram {
         char [] tempRevers = anagram.toCharArray();
         int summ = 0;
         for (int i = 0; i < tempSource.length; i++) {
-            summ += tempSource[i] - tempRevers[tempSource.length - 1 - i];
+            summ += tempSource[i] - tempRevers[i];
         }
         return summ == 0;
     }

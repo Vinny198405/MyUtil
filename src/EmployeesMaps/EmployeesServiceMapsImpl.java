@@ -77,11 +77,11 @@ public class EmployeesServiceMapsImpl implements EmployeesService {
     }
 
     private Iterable<Employee> getFromSubMap(SortedMap<Integer, List<Employee>> subMap) {
-        Set<Employee> result = new HashSet<>();
+        Set<Employee> res = new HashSet<>();
         for (List<Employee> list : subMap.values()) {
-            result.addAll(list);
+            res.addAll(list);
         }
-        return result;
+        return res;
     }
 
     @Override

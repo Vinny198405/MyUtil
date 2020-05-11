@@ -73,28 +73,20 @@ public class EmployeesServiceMapsImpl implements EmployeesService {
 
     @Override
     public Iterable<Employee> getEmployeesAges(int ageFrom, int ageTo) {
+        return getFromSubMap(employeesAge.subMap(ageFrom, ageTo));
+    }
+
+    private Iterable<Employee> getFromSubMap(SortedMap<Integer, List<Employee>> subMap) {
         Set<Employee> result = new HashSet<>();
-        for (int i = 1; i <= employees.size(); i++) {
-            Employee empl = getEmployee(i);
-            int age = empl.getAge();
-            if (age >= ageFrom && age < ageTo) {
-                result.add(empl);
-            }
+        for (List<Employee> list : subMap.values()) {
+            result.addAll(list);
         }
         return result;
     }
 
     @Override
     public Iterable<Employee> getEmployeesSalary(int salaryFrom, int salaryTo) {
-        Set<Employee> result = new HashSet<>();
-        for (int i = 1; i <= employees.size(); i++) {
-            Employee empl = getEmployee(i);
-            int salary = empl.getSalary();
-            if (salary >= salaryFrom && salary < salaryTo) {
-                result.add(empl);
-            }
-        }
-        return result;
+        return getFromSubMap(employeesSalary.subMap(salaryFrom, salaryTo));
     }
 
     @Override
@@ -118,9 +110,8 @@ public class EmployeesServiceMapsImpl implements EmployeesService {
     }
 
     private Employee replaceData(Employee oldEmployee, String newCompany, int newSalary) {
-        Employee employee = new Employee(oldEmployee.getId(), newSalary, newCompany,
+        return new Employee(oldEmployee.getId(), newSalary, newCompany,
                 oldEmployee.getBirthYear(), oldEmployee.getName());
-        return employee;
     }
 
     @Override

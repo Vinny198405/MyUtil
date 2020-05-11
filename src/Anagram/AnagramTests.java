@@ -20,7 +20,9 @@ class AnagramTests {
     }
     @Test
     void testAnagramFalse(){
+        assertFalse(isAnagram(word, null));
         assertFalse(isAnagram(word,""));
         assertFalse(isAnagram(word,"lowlyy"));
+        assertFalse(isAnagram(word, "dwelloy"));
     }
 }

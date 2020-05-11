@@ -46,7 +46,7 @@ public class EmployeesServiceMapsImpl implements EmployeesService {
     private void addEmployeeSalary(Employee empl) {
         Integer salary = empl.getSalary();
         List<Employee> listEmployeesSalary =
-                employeesAge.getOrDefault(salary, new ArrayList<>());
+                employeesSalary.getOrDefault(salary, new ArrayList<>());
         listEmployeesSalary.add(empl);
         employeesSalary.putIfAbsent(salary, listEmployeesSalary);
     }

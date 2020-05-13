@@ -127,7 +127,7 @@ class EmployeeTests {
     void testGetSalary() {
         Collection<Employee> result = (Collection<Employee>)
                 service.getEmployeesSalary(10000, 20000);
-        assertEquals(3, result.size());
+        assertEquals(4, result.size());
 
         result = (Collection<Employee>)
                 service.getEmployeesSalary(1000, 3000);

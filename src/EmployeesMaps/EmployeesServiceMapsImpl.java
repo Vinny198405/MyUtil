@@ -1,5 +1,7 @@
 package EmployeesMaps;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 public class EmployeesServiceMapsImpl implements EmployeesService {
@@ -36,7 +38,7 @@ public class EmployeesServiceMapsImpl implements EmployeesService {
     }
 
     private void addEmployeeAge(Employee empl) {
-        Integer age = empl.getAge();
+        int age = getAge(empl.getBirthYear());
         List<Employee> listEmployeesAge =
                 employeesAge.getOrDefault(age, new ArrayList<>());
         listEmployeesAge.add(empl);
@@ -53,13 +55,12 @@ public class EmployeesServiceMapsImpl implements EmployeesService {
 
     @Override
     public EmployeesReturnCodes removeEmployee(long id) {
-        Employee employee = getEmployee(id);
+        Employee employee = employees.remove(id);
         if (employee == null) {
             return EmployeesReturnCodes.EMPLOYEE_NOT_FOUND;
         }
-        employees.remove(id);
         removeFromEmployees(employee, employee.getCompany(), employeesCompany);
-        removeFromEmployees(employee, employee.getAge(), employeesAge);
+        removeFromEmployees(employee, getAge(employee.getBirthYear()), employeesAge);
         removeFromEmployees(employee, employee.getSalary(), employeesSalary);
         return EmployeesReturnCodes.OK;
     }
@@ -73,12 +74,14 @@ public class EmployeesServiceMapsImpl implements EmployeesService {
 
     @Override
     public Iterable<Employee> getEmployeesAges(int ageFrom, int ageTo) {
-        return getFromSubMap(employeesAge.subMap(ageFrom, ageTo));
+        Collection<List<Employee>> listCollection =
+                employeesAge.subMap(ageFrom,true, ageTo,true).values();
+        return toListEmployees(listCollection);
     }
 
-    private Iterable<Employee> getFromSubMap(SortedMap<Integer, List<Employee>> subMap) {
-        Set<Employee> res = new HashSet<>();
-        for (List<Employee> list : subMap.values()) {
+    private Iterable<Employee> toListEmployees(Collection<List<Employee>> listCollection) {
+        List<Employee> res = new ArrayList<>();
+        for (List<Employee> list:listCollection){
             res.addAll(list);
         }
         return res;
@@ -86,7 +89,9 @@ public class EmployeesServiceMapsImpl implements EmployeesService {
 
     @Override
     public Iterable<Employee> getEmployeesSalary(int salaryFrom, int salaryTo) {
-        return getFromSubMap(employeesSalary.subMap(salaryFrom, salaryTo));
+        Collection<List<Employee>> listCollection =
+                employeesSalary.subMap(salaryFrom,true, salaryTo,true).values();
+        return toListEmployees(listCollection);
     }
 
     @Override
@@ -127,6 +132,10 @@ public class EmployeesServiceMapsImpl implements EmployeesService {
     @Override
     public Iterable<Employee> getEmployeesCompany(String company) {
         return employeesCompany.getOrDefault(company, new ArrayList<>());
+    }
+
+    private int getAge(LocalDate birthDate) {
+        return (int) ChronoUnit.YEARS.between(birthDate, LocalDate.now());
     }
 
 }

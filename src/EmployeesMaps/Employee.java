@@ -45,8 +45,4 @@ public class Employee {
         return name;
     }
 
-    public int getAge() {
-        return LocalDate.now().getYear() - birthYear.getYear();
-    }
-
 }

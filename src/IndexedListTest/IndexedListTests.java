@@ -170,7 +170,7 @@ class IndexedListTests {
     }
 
     public static int compareStringLength(String str0, String str1) {
-        if (str0 == str1) {
+        if (str0.equals(str1)) {
             return 0;
         }
         return str0.length() >= str1.length() ? 1 : -1;

@@ -1,6 +1,6 @@
 package Anagram;
 
-import java.util.Arrays;
+import java.util.HashMap;
 
 public class Anagram {
     public static boolean isAnagram(String word, String anagram) {
@@ -8,20 +8,24 @@ public class Anagram {
             return false;
         }
 
-        if (word.length() != anagram.length()) {
+        if(word.length() != anagram.length()) {
             return false;
         }
-
-        if (word.equals(anagram)) {
-            return true;
+        HashMap<Character, Integer> charCountsMap = getCharCounts(word);
+        for(char c: anagram.toCharArray()) {
+            if (charCountsMap.merge(c, 1, (prev, one) -> prev - one) < 0) {
+                return false;
+            }
         }
+        return true;
+    }
 
-        char [] tempWord = word.toCharArray();
-        char [] tempAnagram = anagram.toCharArray();
-        int summ = 0;
-        for (int i = 0; i < tempWord.length; i++) {
-            summ += tempWord[i] - tempAnagram[i];
+    private static HashMap<Character, Integer> getCharCounts(String word) {
+        HashMap<Character, Integer> res = new HashMap<>();
+        for(char c: word.toCharArray()) {
+            Integer count = res.getOrDefault(c, 0);
+            res.put(c, count + 1);
         }
-        return summ == 0;
+        return res;
     }
 }

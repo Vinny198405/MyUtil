@@ -140,7 +140,8 @@ class IndexedListTests {
             listPersons.sort();
             assertEquals(personVova, listPersons.get(0));
             assertEquals(personMoshe, listPersons.get(1));
-            listPersons.sort(new PersonAgeComparator());
+            listPersons.sort((a,b) -> a.getBirthYear() >= b.getBirthYear() ? -1 : 1);
+            //listPersons.sort(new PersonAgeComparator());
             assertEquals(personVova, listPersons.get(1));
             assertEquals(personMoshe, listPersons.get(0));
         } catch (Exception e) {
@@ -154,7 +155,8 @@ class IndexedListTests {
                 {"abcd", "lm", "lmnopr", "x", "y", "z"};
         String stringsLengthOrder[] =
                 {"x", "y", "z", "lm", "abcd", "lmnopr"};
-        Comparator<String> compLength = new StringLengthComparator();
+        Comparator<String> compLength = IndexedListTests::compareStringLength;
+       // Comparator<String> compLength = new StringLengthComparator();
         IndexedList<String> stringsNatural = getListStrings(stringsNaturalOrder);
         IndexedList<String> stringsLength = getListStrings(stringsLengthOrder);
         assertEquals(-3, stringsNatural.binarySearch("lmn"));
@@ -167,11 +169,19 @@ class IndexedListTests {
         assertEquals(-4, stringsLength.binarySearch("lm", compLength));
     }
 
+    public static int compareStringLength(String str0, String str1) {
+        if (str0 == str1) {
+            return 0;
+        }
+        return str0.length() >= str1.length() ? 1 : -1;
+    }
+
     @Test
     void testBinarySearch() {
         String stringsNaturalOrder[] = {"abcd", "lm", "lmnopr", "x", "y", "z"};
         String stringsLengthOrder[] = {"x", "y", "z", "lm", "abcd", "lmnopr", "re"};
-        Comparator<String> compLength = new StringLengthComparator();
+        Comparator<String> compLength = IndexedListTests::compareStringLength;
+        //Comparator<String> compLength = new StringLengthComparator();
         IndexedList<String> stringsNatural = getListStrings(stringsNaturalOrder);
         IndexedList<String> stringsLength = getListStrings(stringsLengthOrder);
         assertEquals(-3, stringsNatural.binarySearch("lmn"));
@@ -202,9 +212,14 @@ class IndexedListTests {
     @Test
     void testFilter() {
         int expected[] = {10, -8, 70, 30};
-        IndexedList<Integer> listNoEven = listNumbers.filter(new EvenNumbersPredicate());
+        IndexedList<Integer> listNoEven = listNumbers.filter(IndexedListTests::test);
+       // IndexedList<Integer> listNoEven = listNumbers.filter(new EvenNumbersPredicate());
         int actualNumbers[] = getActualNumbers(listNoEven);
         assertArrayEquals(expected, actualNumbers);
+    }
+
+    public static boolean test(Integer num) {
+        return num % 2 == 0;
     }
 
     @Test
@@ -212,9 +227,11 @@ class IndexedListTests {
         // {10, -8, 70, 75, 30};
         listNumbers.add(75);
         int expected[] = {75, 75};
-        EvenNumbersPredicate predicateEven = new EvenNumbersPredicate();
-        assertTrue(listNumbers.removeIf(predicateEven));
-        assertFalse(listNumbers.removeIf(predicateEven));
+//        EvenNumbersPredicate predicateEven = new EvenNumbersPredicate();
+//        assertTrue(listNumbers.removeIf(predicateEven));
+//        assertFalse(listNumbers.removeIf(predicateEven));
+        assertTrue(listNumbers.removeIf(IndexedListTests::test));
+        assertFalse(listNumbers.removeIf(IndexedListTests::test));
         assertArrayEquals(expected, getActualNumbers(listNumbers));
     }
 
@@ -229,7 +246,19 @@ class IndexedListTests {
         listNumbers.add(73);
         listNumbers.add(3);
         int[] expected = {3, 73, 75, 70, 30, 10, -8};
-        listNumbers.sort(new EvenOddComparator());
+       // listNumbers.sort(new EvenOddComparator());
+        listNumbers.sort((n1,n2) -> {
+            if (n1 % 2 == 1 && n2 % 2 == 0) {
+                return -1;
+            }
+            if (n1 % 2 == 0 && n2 % 2 == 1) {
+                return 1;
+            }
+            if (n1 % 2 == 1 && n2 % 2 == 1) {
+                return n1 - n2;
+            }
+            return n2 - n1;
+        });
         assertArrayEquals(expected, getActualNumbers(listNumbers));
     }
 

@@ -13,7 +13,7 @@ public class Anagram {
         }
         HashMap<Character, Integer> charCountsMap = getCharCounts(word);
         for(char c: anagram.toCharArray()) {
-            if (charCountsMap.merge(c, 1, (prev, one) -> prev - one) < 0) {
+            if (charCountsMap.merge(c, 1, (w, a) -> w - a) < 0) {
                 return false;
             }
         }

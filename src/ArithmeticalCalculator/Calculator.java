@@ -1,6 +1,19 @@
 package ArithmeticalCalculator;
 
+import java.util.HashMap;
+import java.util.function.BinaryOperator;
+
 public class Calculator {
+    static HashMap<String, BinaryOperator<Double>> mapOperation;
+
+    static {
+        mapOperation = new HashMap<>();
+        mapOperation.put("+", Double::sum);
+        mapOperation.put("-", (a, b) -> a - b);
+        mapOperation.put("*", (a, b) -> a * b);
+        mapOperation.put("/", (a, b) -> b == 0 ? Double.POSITIVE_INFINITY : a / b);
+    }
+
     static public double calculate(String expr) {
         String[] operands = getOperandsDouble(expr);
         String[] operations = getOperations(expr);
@@ -15,18 +28,12 @@ public class Calculator {
     }
 
     public static Double calculateOne(double op1, String op2, String operation) {
-        double op2Number = Double.parseDouble(op2);
-        switch (operation) {
-            case "+":
-                return op1 + op2Number;
-            case "*":
-                return op1 * op2Number;
-            case "-":
-                return op1 - op2Number;
-            case "/":
-                return op2Number == 0 ? Double.POSITIVE_INFINITY : op1 / op2Number;
+        try {
+            double op2Number = Double.parseDouble(op2);
+            return mapOperation.getOrDefault(operation, (a, b) -> Double.NaN).apply(op1, op2Number);
+        } catch (NumberFormatException e) {
+            return Double.NaN;
         }
-        return Double.NaN;
     }
 
     public static String[] getOperands(String expr) {

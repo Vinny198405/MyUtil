@@ -16,10 +16,9 @@ public class Anagram {
 //            if (charCountsMap.merge(c, 1, (w, a) -> w - a) < 0) {
 //                return false;
 //            }
-            if (charCountsMap.compute(c, (key, val) -> val - 1) == -1) {
+            if (charCountsMap.compute(c, (key, val) -> (val == null) ? -1 : val - 1) < 0) {
                 return false;
             }
-
         }
         return true;
     }

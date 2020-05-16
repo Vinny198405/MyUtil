@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.function.Predicate;
 
 import IndexedLinkedList.IndexedLinkedList;
 import IndexedListInterfece.IndexedList;
@@ -155,7 +156,7 @@ class IndexedListTests {
                 {"abcd", "lm", "lmnopr", "x", "y", "z"};
         String stringsLengthOrder[] =
                 {"x", "y", "z", "lm", "abcd", "lmnopr"};
-        Comparator<String> compLength = IndexedListTests::compareStringLength;
+        Comparator<String> compLength = (s1,s2)-> Integer.compare(s1.length(),s2.length());
        // Comparator<String> compLength = new StringLengthComparator();
         IndexedList<String> stringsNatural = getListStrings(stringsNaturalOrder);
         IndexedList<String> stringsLength = getListStrings(stringsLengthOrder);
@@ -169,18 +170,11 @@ class IndexedListTests {
         assertEquals(-4, stringsLength.binarySearch("lm", compLength));
     }
 
-    public static int compareStringLength(String str0, String str1) {
-        if (str0.equals(str1)) {
-            return 0;
-        }
-        return str0.length() >= str1.length() ? 1 : -1;
-    }
-
     @Test
     void testBinarySearch() {
         String stringsNaturalOrder[] = {"abcd", "lm", "lmnopr", "x", "y", "z"};
         String stringsLengthOrder[] = {"x", "y", "z", "lm", "abcd", "lmnopr", "re"};
-        Comparator<String> compLength = IndexedListTests::compareStringLength;
+        Comparator<String> compLength = (s1,s2)-> Integer.compare(s1.length(),s2.length());
         //Comparator<String> compLength = new StringLengthComparator();
         IndexedList<String> stringsNatural = getListStrings(stringsNaturalOrder);
         IndexedList<String> stringsLength = getListStrings(stringsLengthOrder);
@@ -212,14 +206,10 @@ class IndexedListTests {
     @Test
     void testFilter() {
         int expected[] = {10, -8, 70, 30};
-        IndexedList<Integer> listNoEven = listNumbers.filter(IndexedListTests::test);
+        IndexedList<Integer> listNoEven = listNumbers.filter(n -> n % 2 == 0);
        // IndexedList<Integer> listNoEven = listNumbers.filter(new EvenNumbersPredicate());
         int actualNumbers[] = getActualNumbers(listNoEven);
         assertArrayEquals(expected, actualNumbers);
-    }
-
-    public static boolean test(Integer num) {
-        return num % 2 == 0;
     }
 
     @Test
@@ -230,8 +220,9 @@ class IndexedListTests {
 //        EvenNumbersPredicate predicateEven = new EvenNumbersPredicate();
 //        assertTrue(listNumbers.removeIf(predicateEven));
 //        assertFalse(listNumbers.removeIf(predicateEven));
-        assertTrue(listNumbers.removeIf(IndexedListTests::test));
-        assertFalse(listNumbers.removeIf(IndexedListTests::test));
+        Predicate<Integer> predicateEven = n -> n % 2 == 0;
+        assertTrue(listNumbers.removeIf(predicateEven));
+        assertFalse(listNumbers.removeIf(predicateEven));
         assertArrayEquals(expected, getActualNumbers(listNumbers));
     }
 

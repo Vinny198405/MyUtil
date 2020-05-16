@@ -64,7 +64,7 @@ public class EmployeesServiceMapsImpl implements EmployeesService {
             List<Employee>> employeesCollection, int from, int to) {
         return employeesCollection.subMap(from, true, to,
                 true).values().stream().flatMap(Collection::stream)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     @Override

@@ -15,7 +15,6 @@ public class EmployeesServiceMapsImpl implements EmployeesService {
     /*****************************************************/
     //key - salary, value - list of employees with that salary
     private TreeMap<Integer, List<Employee>> employeesSalary = new TreeMap<>();
-
     /******************************************************/
 
     @Override

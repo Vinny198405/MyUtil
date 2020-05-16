@@ -24,34 +24,17 @@ public class EmployeesServiceMapsImpl implements EmployeesService {
         if (res != null) {
             return EmployeesReturnCodes.EMPLOYEE_ALREADY_EXISTS;
         }
-        addEmployeeSalary(empl);
-        addEmployeeAge(empl);
-        addEmployeeCompany(empl);
+
+        addToCollection(empl, empl.getCompany(), employeesCompany);
+        addToCollection(empl, getAge(empl.getBirthYear()), employeesAge);
+        addToCollection(empl, empl.getSalary(), employeesSalary);
         return EmployeesReturnCodes.OK;
     }
 
-    private void addEmployeeCompany(Employee empl) {
-        String company = empl.getCompany();
-        List<Employee> listEmployeesCompany =
-                employeesCompany.getOrDefault(company, new ArrayList<>());
-        listEmployeesCompany.add(empl);
-        employeesCompany.putIfAbsent(company, listEmployeesCompany);
-    }
-
-    private void addEmployeeAge(Employee empl) {
-        int age = getAge(empl.getBirthYear());
-        List<Employee> listEmployeesAge =
-                employeesAge.getOrDefault(age, new ArrayList<>());
-        listEmployeesAge.add(empl);
-        employeesAge.putIfAbsent(age, listEmployeesAge);
-    }
-
-    private void addEmployeeSalary(Employee empl) {
-        Integer salary = empl.getSalary();
-        List<Employee> listEmployeesSalary =
-                employeesSalary.getOrDefault(salary, new ArrayList<>());
-        listEmployeesSalary.add(empl);
-        employeesSalary.putIfAbsent(salary, listEmployeesSalary);
+    private <T> void addToCollection(Employee employee, T key, Map<T, List<Employee>> collection) {
+        List<Employee> list = collection.getOrDefault(key, new ArrayList<>());
+        list.add(employee);
+        collection.putIfAbsent(key, list);
     }
 
     @Override

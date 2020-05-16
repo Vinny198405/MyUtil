@@ -25,16 +25,16 @@ public class EmployeesServiceMapsImpl implements EmployeesService {
             return EmployeesReturnCodes.EMPLOYEE_ALREADY_EXISTS;
         }
 
-        addToCollection(empl, empl.getCompany(), employeesCompany);
-        addToCollection(empl, getAge(empl.getBirthYear()), employeesAge);
-        addToCollection(empl, empl.getSalary(), employeesSalary);
+        addToEmployees(empl, empl.getCompany(), employeesCompany);
+        addToEmployees(empl, getAge(empl.getBirthYear()), employeesAge);
+        addToEmployees(empl, empl.getSalary(), employeesSalary);
         return EmployeesReturnCodes.OK;
     }
 
-    private <T> void addToCollection(Employee employee, T key, Map<T, List<Employee>> collection) {
-        List<Employee> list = collection.getOrDefault(key, new ArrayList<>());
-        list.add(employee);
-        collection.putIfAbsent(key, list);
+    private <T> void addToEmployees(Employee empl, T key, Map<T, List<Employee>> employees) {
+        List<Employee> list = employees.getOrDefault(key, new ArrayList<>());
+        list.add(empl);
+        employees.putIfAbsent(key, list);
     }
 
     @Override

@@ -3,6 +3,7 @@ package EmployeesMaps;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class EmployeesServiceMapsImpl implements EmployeesService {
     private HashMap<Long, Employee> employees = new HashMap<>();
@@ -74,24 +75,19 @@ public class EmployeesServiceMapsImpl implements EmployeesService {
 
     @Override
     public Iterable<Employee> getEmployeesAges(int ageFrom, int ageTo) {
-        Collection<List<Employee>> listCollection =
-                employeesAge.subMap(ageFrom,true, ageTo,true).values();
-        return toListEmployees(listCollection);
+        return toListEmployees(employeesAge, ageFrom, ageTo);
     }
 
-    private Iterable<Employee> toListEmployees(Collection<List<Employee>> listCollection) {
-        List<Employee> res = new ArrayList<>();
-        for (List<Employee> list:listCollection){
-            res.addAll(list);
-        }
-        return res;
+    private Iterable<Employee> toListEmployees(TreeMap<Integer,
+            List<Employee>> employeesCollection, int from, int to) {
+        return employeesCollection.subMap(from, true, to,
+                true).values().stream().flatMap(Collection::stream)
+                .collect(Collectors.toSet());
     }
 
     @Override
     public Iterable<Employee> getEmployeesSalary(int salaryFrom, int salaryTo) {
-        Collection<List<Employee>> listCollection =
-                employeesSalary.subMap(salaryFrom,true, salaryTo,true).values();
-        return toListEmployees(listCollection);
+        return toListEmployees(employeesSalary, salaryFrom, salaryTo);
     }
 
     @Override

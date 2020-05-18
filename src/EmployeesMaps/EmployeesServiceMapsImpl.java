@@ -15,6 +15,7 @@ public class EmployeesServiceMapsImpl implements EmployeesService {
     /*****************************************************/
     //key - salary, value - list of employees with that salary
     private TreeMap<Integer, List<Employee>> employeesSalary = new TreeMap<>();
+
     /******************************************************/
 
     @Override
@@ -114,5 +115,19 @@ public class EmployeesServiceMapsImpl implements EmployeesService {
 
     private int getAge(LocalDate birthDate) {
         return (int) ChronoUnit.YEARS.between(birthDate, LocalDate.now());
+    }
+
+    @Override
+    public Map<String, List<Employee>> getEmployeesGroupedBySalary(int interval) {
+        return employees.values().stream()
+                .collect(Collectors.groupingBy(v -> {
+                    int salary = v.getSalary();
+                    long modulo = salary % interval;
+                    return String.format("%d - %d", salary - modulo, salary + interval - modulo - 1);
+                }))
+                .entrySet().stream().sorted((e1, e2) -> Comparator.comparing(String::length)
+                        .thenComparing(String::compareTo).compare(e1.getKey(), e2.getKey()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (o1, o2) -> o1,
+                        LinkedHashMap::new));
     }
 }

@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -138,6 +140,18 @@ class EmployeesServiceTests {
         Employee empl = employeesService.getEmployee(ID1);
         assertNotEquals(empl1, empl);
         assertEquals(newSalary, empl.getSalary());
+    }
+
+    @Test
+    void testGroupSalary()
+    {
+        Map<String, List<Employee>> map = employeesService.getEmployeesGroupedBySalary(1000);
+        assertTrue(map.containsKey("1000 - 1999"));
+        assertEquals(1, map.get("2000 - 2999").size());
+
+        map = employeesService.getEmployeesGroupedBySalary(5000);
+        assertTrue(map.containsKey("0 - 4999"));
+        assertEquals(4, map.get("0 - 4999").size());
     }
 
 }

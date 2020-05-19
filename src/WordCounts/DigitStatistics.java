@@ -1,8 +1,10 @@
 package WordCounts;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class DigitStatistics {
     public static void main(String[] args) {
@@ -22,5 +24,14 @@ public class DigitStatistics {
         }
         map.entrySet().stream().sorted(Map.Entry.<Character, Integer>comparingByValue().reversed())
                 .forEach(System.out::println);
+        System.out.println();
+        Arrays.stream(data)
+                .flatMap(n -> Integer.toString(n).chars()).boxed()
+                .collect(Collectors.groupingBy(s -> s, Collectors.counting())).entrySet().stream()
+                .sorted((s1, s2) -> {
+                    return Long.compare(s2.getValue(), s1.getValue());
+                })
+                .forEach(e -> System.out.printf("%c : %d\n", e.getKey(), e.getValue()));
+
     }
 }

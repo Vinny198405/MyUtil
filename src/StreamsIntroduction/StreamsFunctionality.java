@@ -1,7 +1,6 @@
 package StreamsIntroduction;
 
 import java.util.Random;
-import java.util.stream.IntStream;
 
 public class StreamsFunctionality {
     public static void main(String[] args) {

@@ -14,13 +14,10 @@ public class StreamsFunctionality {
     }
 
     public static void displaySportLotoNumbers(int min, int max, int nNumbers) {
-        IntStream stream = new Random().ints(nNumbers, min, max).distinct()
-                .onClose(() -> {
-                    if (max - min + 1 < nNumbers)
-                        throw new RuntimeException("Does not meet the condition");
-                });
-        stream.forEach(s -> System.out.print(s + " "));
-        stream.close();
+        if (max - min + 1 < nNumbers)
+            throw new RuntimeException("Does not meet the condition");
+
+        new Random().ints(min, max).distinct().limit(nNumbers).forEach(s -> System.out.print(s + " "));
         System.out.println();
     }
 

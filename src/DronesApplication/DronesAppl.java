@@ -39,18 +39,22 @@ public class DronesAppl {
     }
 
     private static void displayResults() {
+        displayDrone();
+        displayHeight();
+        displayMostUsedHeights();
+    }
+
+    private static void displayDrone() {
         Arrays.stream(drones)
                 .forEach(d -> System.out.printf("Drone: %d; was in air: %d minutes. It transferred: %d passengers; It was in waiting queue: %d minutes \n",
                         d.getSeqNumber(), d.getTotalAirIterations(), d.getPassengers(), d.getTotalQueueIterations()));
-        displayHeight();
-        System.out.println("The most used heights: " + getMostUsedHeights());
     }
 
     private static void displayHeight() {
         heightsCounts.forEach((key, value) -> System.out.println(key + ": " + value + " flights"));
     }
 
-    private static List<String> getMostUsedHeights() {
+    private static void displayMostUsedHeights() {
         List<String> res = new ArrayList<>();
         Map.Entry<String, Integer> maxEntry = heightsCounts.entrySet().stream()
                 .max(Map.Entry.comparingByValue()).get();
@@ -59,7 +63,7 @@ public class DronesAppl {
                 res.add(entry.getKey());
             }
         }
-        return res;
+        System.out.println("The most used heights: " + res);
     }
 
     private static int totalFlights() {

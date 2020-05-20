@@ -39,11 +39,10 @@ public class DronesAppl {
     }
 
     private static void displayResults() {
-        List<String> listHeights = getMostUsedHeights();
         Arrays.stream(drones)
                 .forEach(d -> System.out.printf("Drone: %d; was in air: %d minutes. It transferred: %d passengers; It was in waiting queue: %d minutes \n",
                         d.getSeqNumber(), d.getTotalAirIterations(), d.getPassengers(), d.getTotalQueueIterations()));
-        System.out.println("The most used heights: " + listHeights);
+        System.out.println("The most used heights: " + getMostUsedHeights());
     }
 
     private static List<String> getMostUsedHeights() {

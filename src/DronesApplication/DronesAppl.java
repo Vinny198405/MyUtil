@@ -1,5 +1,6 @@
 package DronesApplication;
 
+import javax.swing.*;
 import java.util.*;
 import java.util.stream.IntStream;
 
@@ -56,13 +57,10 @@ public class DronesAppl {
 
     private static void displayMostUsedHeights() {
         List<String> res = new ArrayList<>();
-        Map.Entry<String, Integer> maxEntry = heightsCounts.entrySet().stream()
-                .max(Map.Entry.comparingByValue()).get();
-        for (Map.Entry<String, Integer> entry : heightsCounts.entrySet()) {
-            if (entry.getValue().equals(maxEntry.getValue())) {
-                res.add(entry.getKey());
-            }
-        }
+        int maxValueInMap = (Collections.max(heightsCounts.values()));
+        heightsCounts.forEach((key, value) -> {
+            if (value == maxValueInMap) res.add(key);
+        });
         System.out.println("The most used heights: " + res);
     }
 

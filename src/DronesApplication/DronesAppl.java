@@ -42,7 +42,12 @@ public class DronesAppl {
         Arrays.stream(drones)
                 .forEach(d -> System.out.printf("Drone: %d; was in air: %d minutes. It transferred: %d passengers; It was in waiting queue: %d minutes \n",
                         d.getSeqNumber(), d.getTotalAirIterations(), d.getPassengers(), d.getTotalQueueIterations()));
+        displayHeight();
         System.out.println("The most used heights: " + getMostUsedHeights());
+    }
+
+    private static void displayHeight() {
+        heightsCounts.forEach((key, value) -> System.out.println(key + ": " + value + " flights"));
     }
 
     private static List<String> getMostUsedHeights() {

@@ -12,6 +12,7 @@ public class CopyingLargeFilesNIO implements CopyFilesInterface {
         FileChannel out = new RandomAccessFile(to, "rw").getChannel();
         out.transferFrom(in, 0, Long.MAX_VALUE);
         in.close();
+        System.out.println("read counter: " + out.size() + " bytes");
         out.close();
     }
 }

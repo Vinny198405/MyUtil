@@ -25,6 +25,6 @@ public class CopyingLargeFilesIOS implements CopyFilesInterface {
         }
         in.close();
         out.close();
-        System.out.println("read counter: " + count + " bytes");
+        System.out.println("read counter: " + count * -1 + " bytes");
     }
 }

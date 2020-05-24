@@ -17,7 +17,7 @@ public class CopyingLargeFilesIOS implements CopyFilesInterface {
         FileOutputStream out = new FileOutputStream(to);
         byte[] buf = new byte[bufferSize];
         int len;
-        int count = 0;
+        long count = 0;
         while ((len = in.read(buf)) >= 0) {
             count += len;
             out.write(buf, 0, len);
@@ -25,6 +25,6 @@ public class CopyingLargeFilesIOS implements CopyFilesInterface {
         }
         in.close();
         out.close();
-        System.out.println("read counter: " + count * -1 + " bytes");
+        System.out.println("read counter: " + count + " bytes");
     }
 }

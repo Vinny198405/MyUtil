@@ -12,7 +12,7 @@ public class CopyFilesPerformanceTestAppl {
         CopyFilesPerformance test = new CopyFilesPerformance("Test1", from, to, new CopyingLargeFilesNIO());
         test.run();
 
-        int[] bufferSize = {1024, 100 * 1024, (int) Runtime.getRuntime().freeMemory()};
+        int[] bufferSize = {100, 100 * 1024, (int) Runtime.getRuntime().freeMemory()};
         for (int buff : bufferSize) {
             test2 = new CopyFilesPerformance("Test2", from, to, new CopyingLargeFilesIOS(buff));
             test2.run();

@@ -28,7 +28,7 @@ public class BullAndCows {
             System.out.println("Enter a four-digit number:");
             String line = scanner.nextLine();
             if (line.equals("0000")) System.out.println("Debug mode is active. Set number: " + getNumber());
-            checkScanner = checkNamber(line);
+            else checkScanner = checkNamber(line);
         }
     }
 

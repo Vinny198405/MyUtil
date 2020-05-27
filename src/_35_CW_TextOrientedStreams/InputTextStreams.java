@@ -1,4 +1,4 @@
-package Classwork._35_TextOrientedStreams;
+package _35_CW_TextOrientedStreams;
 
 import java.util.Scanner;
 import java.io.*;

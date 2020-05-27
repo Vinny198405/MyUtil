@@ -1,6 +1,6 @@
-package Classwork._36_BooksApplication.controllers;
+package _36_CW_BooksApplication.controllers;
 
-import Classwork._36_BooksApplication.dto.Book;
+import _36_CW_BooksApplication.dto.Book;
 
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;

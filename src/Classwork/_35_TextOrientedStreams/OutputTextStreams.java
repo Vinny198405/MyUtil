@@ -1,4 +1,4 @@
-package TextOrientedStreams;
+package Classwork._35_TextOrientedStreams;
 
 import java.io.FileNotFoundException;
 import java.io.PrintStream;

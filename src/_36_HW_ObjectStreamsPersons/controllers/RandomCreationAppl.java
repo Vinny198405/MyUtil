@@ -22,6 +22,8 @@ public class RandomCreationAppl {
     private static final LocalDate MIN_YEAR_EMPLOYEE = date.minusYears(18);
     private static final LocalDate MAX_YEAR_CHILD = MIN_YEAR_EMPLOYEE;
     private static final LocalDate MAX_YEAR_EMPLOYEE = date.minusYears(67);
+    private static final int MIN_SALARY = 5_000;
+    private static final int MAX_SALARY = 1_000_00;
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
         try (ObjectOutputStream output =
@@ -74,7 +76,7 @@ public class RandomCreationAppl {
     }
 
     private static Person getEmployee() {
-        return new Employee(id++, getAddress(), getRandomString(5, 10), getBirthDay(MIN_YEAR_EMPLOYEE, MAX_YEAR_EMPLOYEE), getCompany(), getTitle(), getRandomNumber(5000, 50000));
+        return new Employee(id++, getAddress(), getRandomString(5, 10), getBirthDay(MIN_YEAR_EMPLOYEE, MAX_YEAR_EMPLOYEE), getCompany(), getTitle(), getRandomNumber(MIN_SALARY, MAX_SALARY));
     }
 
     private static String getTitle() {

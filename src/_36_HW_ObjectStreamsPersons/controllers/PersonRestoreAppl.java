@@ -37,10 +37,7 @@ public class PersonRestoreAppl {
     }
 
     private static int getAveragingSalary() {
-        int count = 0;
-        for (int l : mapSalary.values()) {
-            count += l;
-        }
+        int count = mapSalary.values().stream().mapToInt(Integer::intValue).sum();
         return count / mapSalary.size();
     }
 

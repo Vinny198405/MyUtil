@@ -7,7 +7,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class PersonRestoreAppl {
-    private static Map<String, Long> city;
     private static Map<String, List<Employee>> company = new HashMap<>();
     private static int averagingSalary = 0;
 
@@ -17,8 +16,7 @@ public class PersonRestoreAppl {
 
             List<Person> person = (List<Person>) input.readObject();
 
-            getCityMap(person);
-            displayMostPopulatedCities(city); // Most populated cities
+            displayMostPopulatedCities(person); // Most populated cities
 
             getCompanyMap(person);
             displayCompanyAveragingSalary();
@@ -51,16 +49,13 @@ public class PersonRestoreAppl {
                         .getCompany(), k -> new ArrayList<>()).add((Employee) p));
     }
 
-    private static void getCityMap(List<Person> person) {
-        city = person.stream().collect(Collectors.groupingBy(p -> p.getAddress().getCity(),
-                Collectors.counting()));
-    }
+    private static void displayMostPopulatedCities(List<Person> person) {
+        List listOfMax = person.stream().collect(Collectors.groupingBy(p -> p.getAddress().getCity(),
+                Collectors.counting())).entrySet().stream()
+                .collect(Collectors.groupingBy(Map.Entry::getValue,
+                        Collectors.mapping(Map.Entry::getKey, Collectors.toList())))
+                .entrySet().stream().max(Map.Entry.comparingByKey()).get().getValue();
 
-    private static void displayMostPopulatedCities(Map<String, Long> city) {
-        Long maxValueInMap = (Collections.max(city.values()));
-        List listOfMax = city.entrySet().stream()
-                .filter(entry -> entry.getValue().equals(maxValueInMap))
-                .map(Map.Entry::getKey).collect(Collectors.toList());
         System.out.println("Most populated cities: " + listOfMax);
     }
 }

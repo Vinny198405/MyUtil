@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class PersonRestoreAppl {
     private static Map<String, Long> city;
     private static Map<String, List<Employee>> company = new HashMap<>();
-    private static Map<String, Integer> mapSalary = new HashMap<>();
+    private static int averagingSalary = 0;
 
     public static void main(String[] args) throws Exception {
         try (ObjectInputStream input = new ObjectInputStream(new FileInputStream("person.data"))) {
@@ -21,14 +21,12 @@ public class PersonRestoreAppl {
             displayMostPopulatedCities(city); // Most populated cities
 
             getCompanyMap(person);
-            getMapSalary();
-            displayCompanyAveragingSalary(); // Company names and averaging salary for each company
+            displayCompanyAveragingSalary();
             displayDataOfEmployers(); // Data about all employees with salary greater than overall average salary
         }
     }
 
     private static void displayDataOfEmployers() {
-        int averagingSalary = getAveragingSalary();
         company.values().forEach(s -> {
             s.forEach(v -> {
                 if (v.getSalary() > averagingSalary) System.out.println(v);
@@ -36,20 +34,15 @@ public class PersonRestoreAppl {
         });
     }
 
-    private static int getAveragingSalary() {
-        int count = mapSalary.values().stream().mapToInt(Integer::intValue).sum();
-        return count / mapSalary.size();
-    }
-
     private static void displayCompanyAveragingSalary() {
-        mapSalary.forEach((k, v) -> System.out.println("Company name: " + k + " averaging salary:" + v));
-    }
-
-    private static void getMapSalary() {
         company.forEach((k, v) -> {
-            mapSalary.putAll(v.stream().collect(Collectors.groupingBy(Employee::getCompany,
-                    Collectors.summingInt(s -> s.getSalary() / v.size()))));
+            v.stream().collect(Collectors.groupingBy(Employee::getCompany,
+                    Collectors.summingInt(s -> s.getSalary() / v.size()))).forEach((v1, v2) -> {
+                System.out.println("Company name: " + v1 + " averaging salary:" + v2);
+                averagingSalary += v2;
+            });
         });
+        averagingSalary /= company.size();
     }
 
     private static void getCompanyMap(List<Person> person) {

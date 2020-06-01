@@ -10,16 +10,12 @@ public class BullsCowsGameTcpServer implements GuessGame {
 
     BullsCowsGameTcpServer() {
         generateNumber();
-        installParameters();
-    }
-
-    private void installParameters() {
-        listLog = new ArrayList<>();
-        checkScanner = false;
     }
 
     @Override
     public String startGame() {
+        listLog = new ArrayList<>();
+        checkScanner = false;
         return "startGame";
     }
 

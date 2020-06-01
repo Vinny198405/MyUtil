@@ -1,14 +1,14 @@
-package BullsAndCows;
+package _37_HW_GuessGame;
 
-public class Log {
+public class Logs {
     private int cows;
     private int bulls;
     private String number;
 
-    public Log() {
+    public Logs() {
     }
 
-    public Log(int cows, int bulls, String number) {
+    public Logs(int cows, int bulls, String number) {
         this.cows = cows;
         this.bulls = bulls;
         this.number = number;
@@ -26,4 +26,8 @@ public class Log {
         return number;
     }
 
+    @Override
+    public String toString() {
+        return "{cows:" + cows + "; bulls:" + bulls + "; number:" + number + "}#";
+    }
 }

@@ -1,10 +1,12 @@
 package _37_HW_GuessGame;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TcpConsoleClientAppl {
     private static boolean flTest;
-    private static String[] listLog = new String[0];
+    private static List<String> listLog = new ArrayList<>();
     private static BufferedReader reader;
 
     public static void main(String[] args) throws IOException {
@@ -23,22 +25,18 @@ public class TcpConsoleClientAppl {
                 System.out.println("Enter a four-digit number:");
                 request = reader.readLine();
                 String response = guessGame.move(request);
-                if (response.equals("false")) {
-                    listLog = guessGame.prompt().split("#");
-                    displayLog(listLog);
-                } else break;
+                listLog.add(response);
+                displayLog(listLog);
             }
         } else System.out.println("Server error connect");
-        System.out.printf("The game is solved in %d moves, a given number: %s", listLog.length, request);
+        System.out.printf("The game is solved in %d moves, a given number: %s", listLog.size(), request);
         guessGame.finishGame();
         System.out.println("Do you want to start new game? Y/N");
         String response = reader.readLine();
         return response.equalsIgnoreCase("Y");
     }
 
-    private static void displayLog(String[] listLog) {
-        for (int i = 0; i < listLog.length - 1; i++) {
-            System.out.println(listLog[i]);
-        }
+    private static void displayLog(List<String> listLog) {
+        listLog.forEach(System.out::println);
     }
 }

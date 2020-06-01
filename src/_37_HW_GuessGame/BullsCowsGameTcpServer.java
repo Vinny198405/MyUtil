@@ -4,7 +4,6 @@ import java.util.*;
 
 public class BullsCowsGameTcpServer implements GuessGame {
     private static final int NUMBER_LENGTH = 4;
-    private List<Logs> listLog;
     private static Boolean checkScanner;
     private int[] number;
 
@@ -14,20 +13,18 @@ public class BullsCowsGameTcpServer implements GuessGame {
 
     @Override
     public String startGame() {
-        listLog = new ArrayList<>();
         checkScanner = false;
         return "startGame";
     }
 
     @Override
     public String prompt() {
-        return listLog.toString();
+        return null;
     }
 
     @Override
     public String move(String userInput) {
-        checkScanner = checkNumber(userInput);
-        return checkScanner.toString();
+        return checkNumber(userInput);
     }
 
     @Override
@@ -35,7 +32,7 @@ public class BullsCowsGameTcpServer implements GuessGame {
         return checkScanner;
     }
 
-    private Boolean checkNumber(String strNumbers) {
+    private String checkNumber(String strNumbers) {
         int length = Math.min(strNumbers.length(), NUMBER_LENGTH);
         int countCows = 0;
         int countBulls = 0;
@@ -49,8 +46,8 @@ public class BullsCowsGameTcpServer implements GuessGame {
                 }
             }
         }
-        listLog.add(new Logs(countCows, countBulls, strNumbers));
-        return countBulls == length;
+        checkScanner = countBulls == length;
+        return new Logs(countCows, countBulls, strNumbers).toString();
     }
 
 

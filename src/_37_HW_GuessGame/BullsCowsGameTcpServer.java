@@ -30,8 +30,7 @@ public class BullsCowsGameTcpServer implements GuessGame {
 
     @Override
     public String move(String userInput) {
-        if (userInput.equals("0000")) System.out.println("Debug mode is active. Set number: " + getNumber());
-        else checkScanner = checkNumber(userInput);
+        checkScanner = checkNumber(userInput);
         return checkScanner.toString();
     }
 

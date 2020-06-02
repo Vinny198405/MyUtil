@@ -21,8 +21,7 @@ public class GuessGameTcpClient implements GuessGame {
             Socket socket = new Socket(host, port);
             writer = new PrintStream(socket.getOutputStream());
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            writer.println("startGame# ");
-            return reader.readLine();
+            return getResponse("startGame", " ");
         } catch (UnknownHostException e) {
             throw new RuntimeException("Start game...unknown host " + host);
         } catch (IOException e) {

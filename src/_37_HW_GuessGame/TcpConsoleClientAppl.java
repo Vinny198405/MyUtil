@@ -27,7 +27,6 @@ public class TcpConsoleClientAppl {
                 displayLog(listLog, response);
             }
         } else System.out.println("Server error connect");
-        guessGame.finishGame();
         return finishGame(listLog);
     }
 

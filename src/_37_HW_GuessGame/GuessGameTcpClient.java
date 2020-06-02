@@ -38,17 +38,18 @@ public class GuessGameTcpClient implements GuessGame {
     @Override
     public Boolean isFinished() throws IOException {
         String response = "";
+        Boolean res = false;
         writer.println("isFinished# ");
         response = reader.readLine();
-        return response.equals("true");
+        if (res = response.equals("true")){
+            writer.close();
+            reader.close();
+        }
+        return res;
     }
 
     public String getNumber() throws IOException {
         writer.println("getNumber# ");
         return reader.readLine();
-    }
-
-    public void finishGame() {
-        writer.println("finishGame");
     }
 }

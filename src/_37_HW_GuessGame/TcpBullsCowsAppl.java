@@ -21,7 +21,7 @@ public class TcpBullsCowsAppl {
              PrintStream writer = new PrintStream(socket.getOutputStream())) {
             while (true) {
                 String request = reader.readLine();
-                if (request == null || request.equals("finishGame")) {
+                if (request == null) {
                     break;
                 }
                 String response = getResponse(request, bullsCows);

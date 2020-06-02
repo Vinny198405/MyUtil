@@ -27,8 +27,12 @@ public class TcpConsoleClientAppl {
                 displayLog(listLog, response);
             }
         } else System.out.println("Server error connect");
-        System.out.printf("The game is solved in %d moves, a given number: %s", listLog.size(), request);
         guessGame.finishGame();
+        return finishGame(request, listLog);
+    }
+
+    private static boolean finishGame(String request, List<String> listLog) throws IOException {
+        System.out.printf("The game is solved in %d moves, a given number: %s \n", listLog.size(), request);
         System.out.println("Do you want to start new game? Y/N");
         String response = reader.readLine();
         return response.equalsIgnoreCase("Y");

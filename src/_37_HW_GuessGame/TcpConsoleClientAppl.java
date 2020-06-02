@@ -18,15 +18,15 @@ public class TcpConsoleClientAppl {
         String request = "";
         GuessGameTcpClient guessGame = new GuessGameTcpClient(4000, "localhost");
         List<String> listLog = new ArrayList<>();
-        if (guessGame.startGame().equals("startGame")) {
-            if (flTest) System.out.println(guessGame.getNumber());
-            while (!guessGame.isFinished()) {
-                System.out.println(guessGame.prompt());
-                request = reader.readLine();
-                String response = guessGame.move(request);
-                displayLog(listLog, response);
-            }
-        } else System.out.println("Server error connect");
+        String number = guessGame.startGame();
+
+        if (flTest) System.out.println(number);
+        while (!guessGame.isFinished()) {
+            System.out.println(guessGame.prompt());
+            request = reader.readLine();
+            String response = guessGame.move(request);
+            displayLog(listLog, response);
+        }
         return finishGame(listLog);
     }
 

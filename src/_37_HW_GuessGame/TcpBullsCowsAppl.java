@@ -48,8 +48,6 @@ public class TcpBullsCowsAppl {
                 return bullsCows.isFinished().toString();
             case "prompt":
                 return bullsCows.prompt();
-            case "getNumber":
-                return bullsCows.getNumber();
             default:
                 return "Unknown Request";
         }

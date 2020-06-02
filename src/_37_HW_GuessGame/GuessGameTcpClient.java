@@ -52,10 +52,6 @@ public class GuessGameTcpClient implements GuessGame {
         return res;
     }
 
-    public String getNumber() {
-        return getResponse("getNumber", " ");
-    }
-
     private String getResponse(String headers, String payload) {
         writer.println(headers + "#" + payload);
         try {

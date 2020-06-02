@@ -8,13 +8,13 @@ public class BullsCowsGameTcpServer implements GuessGame {
     private int[] number;
 
     BullsCowsGameTcpServer() {
-        generateNumber();
     }
 
     @Override
     public String startGame() {
+        generateNumber();
         checkScanner = false;
-        return "startGame";
+        return getNumber();
     }
 
     @Override
@@ -57,7 +57,7 @@ public class BullsCowsGameTcpServer implements GuessGame {
                 .limit(NUMBER_LENGTH).toArray();
     }
 
-    public String getNumber() {
+    private String getNumber() {
         StringBuilder res = new StringBuilder();
         Arrays.stream(number).boxed().forEach(n -> res.append(n.toString()));
         return res.toString();

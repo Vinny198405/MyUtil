@@ -16,7 +16,7 @@ public class TcpConsoleClientAppl {
 
     private static boolean startGame() throws IOException {
         String request = "";
-        GuessGameTcpClient guessGame = new GuessGameTcpClient(4000, "localhost");
+        GuessGame guessGame = new GuessGameTcpClient(4000, "localhost");
         List<String> listLog = new ArrayList<>();
         String number = guessGame.startGame();
 

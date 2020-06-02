@@ -19,7 +19,7 @@ public class BullsCowsGameTcpServer implements GuessGame {
 
     @Override
     public String prompt() {
-        return "Enter a four-digit number:";
+        return "Enter number of 4 unrepeated digits [1-9]:";
     }
 
     @Override

@@ -38,7 +38,7 @@ public class GuessGameTcpClient implements GuessGame {
     @Override
     public Boolean isFinished() throws IOException {
         String response = "";
-        Boolean res = false;
+        Boolean res;
         writer.println("isFinished# ");
         response = reader.readLine();
         if (res = response.equals("true")){

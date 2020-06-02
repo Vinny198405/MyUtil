@@ -31,15 +31,13 @@ public class GuessGameTcpClient implements GuessGame {
     }
 
     @Override
-    public String prompt() throws IOException {
-        writer.println("prompt# ");
-        return reader.readLine();
+    public String prompt() {
+        return getResponse("prompt", " ");
     }
 
     @Override
-    public String move(String userInput) throws IOException {
-        writer.println("move#" + userInput);
-        return reader.readLine();
+    public String move(String userInput) {
+        return getResponse("move", userInput);
     }
 
     @Override
@@ -55,8 +53,20 @@ public class GuessGameTcpClient implements GuessGame {
         return res;
     }
 
-    public String getNumber() throws IOException {
-        writer.println("getNumber# ");
-        return reader.readLine();
+    public String getNumber() {
+        return getResponse("getNumber", " ");
+    }
+
+    private String getResponse(String headers, String payload) {
+        writer.println(headers + "#" + payload);
+        try {
+            String res = reader.readLine();
+            if (res.contains("Unknown Request")) {
+                throw new RuntimeException(headers + "..." + "Unknown request");
+            }
+            return res;
+        } catch (IOException e) {
+            throw new RuntimeException(headers + "..." + e.getMessage());
+        }
     }
 }

@@ -64,45 +64,4 @@ public class BullsCowsGameTcpServer implements GuessGame {
         Arrays.stream(number).boxed().forEach(n -> res.append(n.toString()));
         return res.toString();
     }
-
-    void runClient(Socket socket) {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-             PrintStream writer = new PrintStream(socket.getOutputStream())) {
-            while (true) {
-                String request = reader.readLine();
-                if (request == null || request.equals("finishGame")) {
-                    break;
-                }
-                String response = getResponse(request);
-                writer.println(response);
-            }
-        } catch (IOException e) {
-            System.out.println("illegal way of closing connection");
-            return;
-        }
-        System.out.println("client closed connection");
-    }
-
-    private String getResponse(String request) {
-        String[] headersPayload = request.split("#");
-        String headers = headersPayload[0];
-        String payload = headersPayload[1];
-        if (headersPayload.length != 2) return "Unknown Request";
-        switch (headers) {
-            case "startGame":
-                return startGame();
-            case "move":
-                return move(payload);
-            case "isFinished":
-                return isFinished().toString();
-            case "prompt":
-                return prompt();
-            case "getNumber":
-                return getNumber();
-            default:
-                return "Unknown Request";
-        }
-    }
-
-
 }

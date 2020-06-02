@@ -9,6 +9,7 @@ public class GuessGameTcpClient implements GuessGame {
     private BufferedReader reader;
     private int port;
     private String host;
+    private Socket socket;
 
     public GuessGameTcpClient(int port, String host) {
         this.port = port;
@@ -18,7 +19,7 @@ public class GuessGameTcpClient implements GuessGame {
     @Override
     public String startGame() {
         try {
-            Socket socket = new Socket(host, port);
+            socket = new Socket(host, port);
             writer = new PrintStream(socket.getOutputStream());
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             return getResponse("startGame", " ");
@@ -40,14 +41,15 @@ public class GuessGameTcpClient implements GuessGame {
     }
 
     @Override
-    public Boolean isFinished() throws IOException {
-        String response = "";
-        Boolean res;
-        writer.println("isFinished# ");
-        response = reader.readLine();
-        if (res = response.equals("true")) {
-            writer.close();
-            reader.close();
+    public Boolean isFinished() {
+        String response = getResponse("isFinished", " ");
+        boolean res = response.equals("true");
+        if (res) {
+            try {
+                socket.close();
+            } catch (IOException e) {
+                throw new RuntimeException("Closing socket..." + e.getMessage());
+            }
         }
         return res;
     }

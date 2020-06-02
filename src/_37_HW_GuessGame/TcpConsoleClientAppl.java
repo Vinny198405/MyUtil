@@ -24,8 +24,7 @@ public class TcpConsoleClientAppl {
                 System.out.println("Enter a four-digit number:");
                 request = reader.readLine();
                 String response = guessGame.move(request);
-                listLog.add(response);
-                displayLog(listLog);
+                displayLog(listLog, response);
             }
         } else System.out.println("Server error connect");
         System.out.printf("The game is solved in %d moves, a given number: %s", listLog.size(), request);
@@ -35,7 +34,8 @@ public class TcpConsoleClientAppl {
         return response.equalsIgnoreCase("Y");
     }
 
-    private static void displayLog(List<String> listLog) {
+    private static void displayLog(List<String> listLog, String response) {
+        listLog.add(response);
         listLog.forEach(System.out::println);
     }
 }

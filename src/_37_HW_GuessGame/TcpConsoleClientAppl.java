@@ -6,7 +6,6 @@ import java.util.List;
 
 public class TcpConsoleClientAppl {
     private static boolean flTest;
-    private static List<String> listLog = new ArrayList<>();
     private static BufferedReader reader;
 
     public static void main(String[] args) throws IOException {
@@ -18,7 +17,7 @@ public class TcpConsoleClientAppl {
     private static boolean startGame() throws IOException {
         String request = "";
         GuessGameTcpClient guessGame = new GuessGameTcpClient(4000, "localhost");
-
+        List<String> listLog = new ArrayList<>();
         if (guessGame.startGame().equals("startGame")) {
             if (flTest) System.out.println(guessGame.getNumber());
             while (!guessGame.isFinished()) {

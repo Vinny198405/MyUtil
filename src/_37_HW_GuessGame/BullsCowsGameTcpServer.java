@@ -1,7 +1,5 @@
 package _37_HW_GuessGame;
 
-import java.io.*;
-import java.net.Socket;
 import java.util.*;
 
 public class BullsCowsGameTcpServer implements GuessGame {

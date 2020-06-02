@@ -6,15 +6,19 @@ import java.net.Socket;
 public class GuessGameTcpClient implements GuessGame {
     private PrintStream writer;
     private BufferedReader reader;
+    private int PORT;
+    private String HOST;
 
     public GuessGameTcpClient(int PORT, String HOST) throws IOException {
-        Socket socket = new Socket(HOST, PORT);
-        writer = new PrintStream(socket.getOutputStream());
-        reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        this.PORT = PORT;
+        this.HOST = HOST;
     }
 
     @Override
     public String startGame() throws IOException {
+        Socket socket = new Socket(HOST, PORT);
+        writer = new PrintStream(socket.getOutputStream());
+        reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         writer.println("startGame# ");
         return reader.readLine();
     }

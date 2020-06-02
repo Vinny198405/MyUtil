@@ -21,18 +21,18 @@ public class TcpConsoleClientAppl {
         if (guessGame.startGame().equals("startGame")) {
             if (flTest) System.out.println(guessGame.getNumber());
             while (!guessGame.isFinished()) {
-                System.out.println("Enter a four-digit number:");
+                System.out.println(guessGame.prompt());
                 request = reader.readLine();
                 String response = guessGame.move(request);
                 displayLog(listLog, response);
             }
         } else System.out.println("Server error connect");
         guessGame.finishGame();
-        return finishGame(request, listLog);
+        return finishGame(listLog);
     }
 
-    private static boolean finishGame(String request, List<String> listLog) throws IOException {
-        System.out.printf("The game is solved in %d moves, a given number: %s \n", listLog.size(), request);
+    private static boolean finishGame(List<String> listLog) throws IOException {
+        System.out.printf("The game is solved in %d moves\n", listLog.size());
         System.out.println("Do you want to start new game? Y/N");
         String response = reader.readLine();
         return response.equalsIgnoreCase("Y");

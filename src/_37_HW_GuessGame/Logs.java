@@ -28,6 +28,6 @@ public class Logs {
 
     @Override
     public String toString() {
-        return "{cows:" + cows + "; bulls:" + bulls + "; number:" + number + "}#";
+        return "{cows:" + cows + "; bulls:" + bulls + "; number:" + number + "}";
     }
 }

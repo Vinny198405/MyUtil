@@ -28,22 +28,24 @@ public class BullAndCows {
             System.out.println("Enter a four-digit number:");
             String line = scanner.nextLine();
             if (line.equals("0000")) System.out.println("Debug mode is active. Set number: " + getNumber());
-            else checkScanner = checkNamber(line);
+            else checkScanner = checkNumber(line);
         }
     }
 
-    private Boolean checkNamber(String strNumbers) {
+    private Boolean checkNumber(String strNumbers) {
         int length = Math.min(strNumbers.length(), NUMBER_LENGTH);
         int countCows = 0;
         int countBulls = 0;
-        for (int i = 0; i < NUMBER_LENGTH; i++) {
-            for (int j = 0; j < length; j++) {
-                int num = Character.getNumericValue(strNumbers.charAt(j));
-                if (number[i] == num) {
-                    if (i == j) {
-                        countBulls++;
-                    } else countCows++;
+
+        for (int i = 0; i < length; i++) {
+            int index = strNumbers.indexOf(Integer.toString(number[i]));
+            if (index >= 0) {
+                if (index == i) {
+                    countBulls++;
+                } else {
+                    countCows++;
                 }
+
             }
         }
         listLog.add(new Log(countCows, countBulls, strNumbers));

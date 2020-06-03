@@ -45,7 +45,6 @@ public class BullAndCows {
                 } else {
                     countCows++;
                 }
-
             }
         }
         listLog.add(new Log(countCows, countBulls, strNumbers));

@@ -1,13 +1,17 @@
-package _37_HW_GuessGame;
+package _38_HW_GuessGameTcpJava.server;
 
-import java.util.*;
+import _37_HW_GuessGame.Logs;
+import _38_HW_GuessGameTcpJava.interfece.GuessGameInterface;
 
-public class BullsCowsGameTcpServer implements GuessGame {
+import java.util.Arrays;
+import java.util.Random;
+
+public class GameTcpServer implements GuessGameInterface {
     private static final int NUMBER_LENGTH = 4;
     private static Boolean checkScanner;
     private int[] number;
 
-    public BullsCowsGameTcpServer() {
+    public GameTcpServer() {
     }
 
     @Override

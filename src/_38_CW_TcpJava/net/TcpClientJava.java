@@ -4,9 +4,9 @@ import java.io.*;
 import java.net.*;
 
 public class TcpClientJava implements AutoCloseable {
-    protected Socket socket;
-    protected ObjectOutputStream outputNet;
-    protected ObjectInputStream inputNet;
+    private Socket socket;
+    private ObjectOutputStream outputNet;
+    private ObjectInputStream inputNet;
     public TcpClientJava(String hostname, int port)  {
         try {
             socket = new Socket(hostname, port);
@@ -31,6 +31,7 @@ public class TcpClientJava implements AutoCloseable {
             }
             return (T)response.responseData;
         } catch (Exception e) {
+            assert response != null;
             throw new RuntimeException(response.responseData.toString());
         }
     }

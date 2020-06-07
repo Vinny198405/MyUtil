@@ -64,6 +64,10 @@ public interface InputOutput {
         return inputObject(prompt, "Wrong option", s -> options.contains(s) ? s : null);
     }
 
+    default String inputByPattern(String prompt, String errorMessage, String pattern) {
+        return inputObject(prompt, errorMessage, s -> s.matches(pattern) ? s : null);
+    }
+
     default void displayLine(Object obj) {
         display(obj.toString() + "\n");
     }

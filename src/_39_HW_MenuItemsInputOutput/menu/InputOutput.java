@@ -3,6 +3,7 @@ package _39_HW_MenuItemsInputOutput.menu;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Set;
 import java.util.function.Function;
 
 public interface InputOutput {
@@ -36,34 +37,31 @@ public interface InputOutput {
     }
 
     default Integer inputInteger(String prompt) {
-        return inputObject(prompt, "Incorrect number",
-                s -> {
-                    try {
-                        return (Integer) Integer.parseInt(s);
-                    } catch (Exception e) {
-                        return null;
-                    }
-                });
+        return inputObject(prompt, "It is not a number", Integer::parseInt);
     }
 
     default String inputEmail(String prompt) {
-        return inputObject(prompt, "Wrong Email",
+        return inputObject(prompt, "Wrong email format",
                 s -> s.matches(email()) ? s + " is correct email" : null);
     }
 
     default String inputPhone(String prompt) {
-        return inputObject(prompt, "Wrong Phone",
+        return inputObject(prompt, "Wrong mobile phone format",
                 s -> s.matches(phone()) ? s + " is correct phone" : null);
     }
 
     default String inputIpV4(String prompt) {
-        return inputObject(prompt, "Wrong IpV4",
+        return inputObject(prompt, "Wrong IPv4 format",
                 s -> s.matches(ipV4()) ? s + " is correct IpV4" : null);
     }
 
     default LocalDate inputDate(String prompt) {
-        return inputObject(prompt, "Wrong Date",
+        return inputObject(prompt, "Wrong Date, it should be in ISO format  YYYY-MM-DD",
                 s -> isValidDate(s) ? LocalDate.parse(s) : null);
+    }
+
+    default String inputOptions(String prompt, Set<String> options) {
+        return inputObject(prompt, "Wrong option", s -> options.contains(s) ? s : null);
     }
 
     default void displayLine(Object obj) {

@@ -1,5 +1,7 @@
 package EmployeesMaps;
 
+import _40_HW_EmployeesMapsStreams.dto.CompanySalary;
+
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +18,7 @@ public interface EmployeesService {
     Map<String, List<Employee>> getEmployeesGroupedBySalary(int interval);
     /*key - string containing interval, for example,  2000 - 3000 (interval=1000)
      * value - list of employees with salary in the key-interval (maximal interval value is exclusive )*/
-
+    List<CompanySalary> getCompaniesAvgSalary();
+    List<CompanySalary> getCompaniesGreaterAvgSalary();
 
 }

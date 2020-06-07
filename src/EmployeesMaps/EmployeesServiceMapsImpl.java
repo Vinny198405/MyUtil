@@ -1,9 +1,12 @@
 package EmployeesMaps;
 
+import _40_HW_EmployeesMapsStreams.dto.CompanySalary;
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class EmployeesServiceMapsImpl implements EmployeesService {
     private HashMap<Long, Employee> employees = new HashMap<>();
@@ -125,4 +128,27 @@ public class EmployeesServiceMapsImpl implements EmployeesService {
                     return String.format("%d - %d", minIntervalValue, minIntervalValue + interval - 1);
                 }, Collectors.toList()));
     }
+
+    @Override
+    public List<CompanySalary> getCompaniesAvgSalary() {
+        return getStreamCompanySalary().collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CompanySalary> getCompaniesGreaterAvgSalary() {
+        double avgSalary = getAvgSalary();
+        return getStreamCompanySalary().filter(cs -> cs.getAvgSalary() > avgSalary).collect(Collectors.toList());
+    }
+
+    private Double getAvgSalary() {
+        return employees.values().stream().collect(Collectors.averagingInt(Employee::getSalary));
+    }
+
+    private Stream<CompanySalary> getStreamCompanySalary() {
+        Map<String, Double> companiesSalary = employees.values().stream()
+                .collect(Collectors.groupingBy(Employee::getCompany, Collectors.averagingInt(Employee::getSalary)));
+        return companiesSalary.entrySet().stream()
+                .map(e -> new CompanySalary(e.getKey(), e.getValue()));
+    }
+
 }

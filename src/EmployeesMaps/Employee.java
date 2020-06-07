@@ -1,13 +1,17 @@
 package EmployeesMaps;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Employee {
+public class Employee implements Serializable {
     private long id;
     private int salary;
     private String company;
     private LocalDate birthYear;
     private String name;
+
+    public Employee() {
+    }
 
     public Employee(long id, int salary, String company, LocalDate birthYear, String name) {
         super();

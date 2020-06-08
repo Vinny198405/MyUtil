@@ -11,7 +11,7 @@ public class UpdateSalary extends EmployeesItem {
 
     @Override
     public String displayName() {
-        return "Update Company";
+        return "Update Salary";
     }
 
     @Override

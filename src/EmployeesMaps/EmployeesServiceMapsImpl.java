@@ -108,7 +108,7 @@ public class EmployeesServiceMapsImpl implements EmployeesService {
 
     @Override
     public Iterable<Employee> getEmployees() {
-        return employees.values();
+        return new ArrayList<>(employees.values());
     }
 
     @Override

@@ -40,8 +40,6 @@ public class EmployeesTcpProtocol implements ProtocolJava {
     }
 
 
-
-
     @Override
     public ResponseJava getResponse(RequestJava request) {
         Function<Serializable, ResponseJava> fn =
@@ -89,7 +87,7 @@ public class EmployeesTcpProtocol implements ProtocolJava {
     private ResponseJava getEmployeesAges(Serializable requestData) {
         try {
             RequestData data = (RequestData) requestData;
-            Iterable<Employee> res = employees.getEmployeesAges(data.num, data.num2);
+            Iterable<Employee> res = employees.getEmployeesAges((int) data.obj1, (int) data.obj2);
             return new ResponseJava(TcpResponseCode.OK, (Serializable) res);
         } catch (Exception e) {
             return new ResponseJava(TcpResponseCode.UNKNOWN, e.getMessage());
@@ -108,7 +106,7 @@ public class EmployeesTcpProtocol implements ProtocolJava {
     private ResponseJava updateSalary(Serializable requestData) {
         try {
             RequestData data = (RequestData) requestData;
-            EmployeesReturnCodes res = employees.updateSalary(data.id, data.num);
+            EmployeesReturnCodes res = employees.updateSalary((long) data.obj1, (int) data.obj2);
             return new ResponseJava(TcpResponseCode.OK, res);
         } catch (Exception e) {
             return new ResponseJava(TcpResponseCode.UNKNOWN, e.getMessage());
@@ -118,7 +116,7 @@ public class EmployeesTcpProtocol implements ProtocolJava {
     private ResponseJava updateCompany(Serializable requestData) {
         try {
             RequestData data = (RequestData) requestData;
-            EmployeesReturnCodes res = employees.updateCompany(data.id, data.str);
+            EmployeesReturnCodes res = employees.updateCompany((long) data.obj1, (String) data.obj2);
             return new ResponseJava(TcpResponseCode.OK, res);
         } catch (Exception e) {
             return new ResponseJava(TcpResponseCode.UNKNOWN, e.getMessage());
@@ -128,7 +126,7 @@ public class EmployeesTcpProtocol implements ProtocolJava {
     private ResponseJava getEmployeesSalary(Serializable requestData) {
         try {
             RequestData data = (RequestData) requestData;
-            Iterable<Employee> res = employees.getEmployeesSalary(data.num, data.num2);
+            Iterable<Employee> res = employees.getEmployeesSalary((int) data.obj1, (int) data.obj2);
             return new ResponseJava(TcpResponseCode.OK, (Serializable) res);
         } catch (Exception e) {
             return new ResponseJava(TcpResponseCode.UNKNOWN, e.getMessage());

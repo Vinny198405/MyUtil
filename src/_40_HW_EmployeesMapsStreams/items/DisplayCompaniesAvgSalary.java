@@ -16,6 +16,7 @@ public class DisplayCompaniesAvgSalary extends EmployeesItem {
 
     @Override
     public void perform() {
-        inputOutput.displayLine(employees.getCompaniesAvgSalary());
+      //  inputOutput.displayLine(employees.getCompaniesAvgSalary());
+        employees.getCompaniesAvgSalary().forEach(inputOutput::displayLine);
     }
 }

@@ -142,19 +142,17 @@ public class EmployeesTcpProtocol implements ProtocolJava {
         }
     }
 
-    private ResponseJava getCompaniesAvgSalary(Serializable serializable) {
+    private ResponseJava getCompaniesAvgSalary(Serializable requestData) {
         try {
-            List<CompanySalary> res = employees.getCompaniesAvgSalary();
-            return new ResponseJava(TcpResponseCode.OK, (Serializable) res);
+            return new ResponseJava(TcpResponseCode.OK, (Serializable) employees.getCompaniesAvgSalary());
         } catch (Exception e) {
             return new ResponseJava(TcpResponseCode.UNKNOWN, e.getMessage());
         }
     }
 
-    private ResponseJava getCompaniesGreaterAvgSalary(Serializable serializable) {
+    private ResponseJava getCompaniesGreaterAvgSalary(Serializable requestData) {
         try {
-            List<CompanySalary> res = employees.getCompaniesGreaterAvgSalary();
-            return new ResponseJava(TcpResponseCode.OK, (Serializable) res);
+            return new ResponseJava(TcpResponseCode.OK, (Serializable) employees.getCompaniesGreaterAvgSalary());
         } catch (Exception e) {
             return new ResponseJava(TcpResponseCode.UNKNOWN, e.getMessage());
         }

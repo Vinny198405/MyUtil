@@ -25,7 +25,8 @@ public class ServerJava implements Runnable {
             while (true) {
                 Socket socket = serverSocket.accept();
                 ServerClientJava client = new ServerClientJava(socket, protocol);
-                client.run();
+                Thread thread = new Thread(client);
+                thread.start();
             }
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage());

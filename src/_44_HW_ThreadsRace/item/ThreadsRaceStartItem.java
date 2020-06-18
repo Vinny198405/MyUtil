@@ -4,8 +4,6 @@ import _39_HW_MenuItemsInputOutput.menu.InputOutput;
 import _44_HW_ThreadsRace.ThreadsRace;
 
 public class ThreadsRaceStartItem extends ThreadsRaceItem {
-    private static final int MIN = 1;
-    private static final int MAX = 5;
     private static ThreadsRace winner = null;
 
     public ThreadsRaceStartItem(ThreadsRace threadsRace, InputOutput inputOutput) {
@@ -36,17 +34,12 @@ public class ThreadsRaceStartItem extends ThreadsRaceItem {
 
     private void startThreads(int threads, int distance) throws InterruptedException {
         ThreadsRace[] threadsRace = new ThreadsRace[threads];
-        int period = getPeriod();
         for (int i = 0; i < threads; i++) {
-            threadsRace[i] = new ThreadsRace("Thread" + i, period, distance);
+            threadsRace[i] = new ThreadsRace("Thread" + i, distance);
             threadsRace[i].start();
         }
         for (ThreadsRace sh : threadsRace) {
             sh.join();
         }
-    }
-
-    private static int getPeriod() {
-        return (int) (MIN + Math.random() * (MAX - MIN));
     }
 }

@@ -17,11 +17,11 @@ public class ThreadsRace extends Thread {
     public void run() {
         for (int i = 0; i < iterations; i++) {
             try {
+                System.out.println("Iteration " + (i + 1) + " " + name);
                 sleep(period);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println("Iteration " + (i + 1) + " " + name);
         }
         ThreadsRaceStartItem.done();
     }

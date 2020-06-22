@@ -26,7 +26,7 @@ public class PrinterController {
     private static void startThread() {
         printers = new Printer[N_PRINTER];
         for (int i = 0; i < N_PRINTER; i++) {
-            printers[i] = new Printer(Integer.toString(i), N_NUMBERS, N_PORTIONS);
+            printers[i] = new Printer(order[i], N_NUMBERS, N_PORTIONS);
             printers[i].start();
         }
     }

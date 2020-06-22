@@ -1,11 +1,12 @@
 package _45_HW_PrintersShcedulingPortiion;
 
+import static _45_HW_PrintersShcedulingPortiion.PrinterController.threadId;
+
 public class Printer extends Thread {
     private String name;
     private int nNumbers;
     private int nPortions;
     private volatile boolean running = true;
-    private volatile boolean permitPrint = false;
 
     public Printer(String name, int nNumbers, int nPortions) {
         this.name = name;
@@ -16,7 +17,7 @@ public class Printer extends Thread {
     @Override
     public void run() {
         while (running) {
-            if (permitPrint) {
+            if (threadId.equals(name)) {
                 for (int i = 0; i < nPortions; i++) {
                     if (nNumbers-- > 0) {
                         System.out.print(name);
@@ -24,7 +25,6 @@ public class Printer extends Thread {
                     if (!running) break;
                 }
                 System.out.println();
-                permitPrint = false;
                 if (nNumbers > 0) {
                     PrinterController.finishedPrinting();
                 }
@@ -42,9 +42,5 @@ public class Printer extends Thread {
 
     public void setRunning(boolean running) {
         this.running = running;
-    }
-
-    public void setPermitPrint(boolean permitPrint) {
-        this.permitPrint = permitPrint;
     }
 }

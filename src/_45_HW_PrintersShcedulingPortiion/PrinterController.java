@@ -6,8 +6,7 @@ public class PrinterController {
     private static int N_NUMBERS = 100;
     private static int N_PORTIONS = 10;
     private static int index = 0;
-    private static String[] order = {"0", "1", "2", "3"};
-    static String threadId = "null";
+    private static int[] order = {0, 1, 2, 3};
 
     public static void main(String[] args) {
         startThread();
@@ -19,8 +18,8 @@ public class PrinterController {
         printThread(order[index++]);
     }
 
-    private static void printThread(String order) {
-        threadId = order;
+    private static void printThread(int order) {
+        printers[order].interrupt();
     }
 
     private static void startThread() {

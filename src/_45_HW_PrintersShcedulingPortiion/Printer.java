@@ -4,6 +4,7 @@ public class Printer extends Thread {
     private int name;
     private int nNumbers;
     private int nPortions;
+    private Thread thread;
     private volatile boolean running = true;
 
     public Printer(int name, int nNumbers, int nPortions) {
@@ -32,9 +33,9 @@ public class Printer extends Thread {
         }
         System.out.println();
         if (nNumbers > 0) {
-            PrinterController.finishedPrinting();
+            thread.interrupt();
         } else {
-            PrinterController.finishedPrinting();
+            thread.interrupt();
             running = false;
         }
     }
@@ -45,5 +46,9 @@ public class Printer extends Thread {
 
     public void setRunning(boolean running) {
         this.running = running;
+    }
+
+    public void setThread(Thread thread) {
+        this.thread = thread;
     }
 }

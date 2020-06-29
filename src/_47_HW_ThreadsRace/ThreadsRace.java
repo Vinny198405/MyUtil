@@ -27,11 +27,11 @@ public class ThreadsRace extends Thread {
                 e.printStackTrace();
             }
         }
-        saveWinner(name);
+        Instant finish = Instant.now();
+        saveWinner(name, finish);
     }
 
-    static synchronized private void saveWinner(String name) {
-        Instant finish = Instant.now();
+    static synchronized private void saveWinner(String name, Instant finish) {
         if (winner == null) winner = name;
         winnerList.add(name + " " + finish);
     }

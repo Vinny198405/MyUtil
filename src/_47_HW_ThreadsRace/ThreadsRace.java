@@ -1,7 +1,7 @@
 package _47_HW_ThreadsRace;
 
 import java.time.Instant;
-import java.util.List;
+import java.util.Map;
 
 public class ThreadsRace extends Thread {
     public String name;
@@ -9,7 +9,7 @@ public class ThreadsRace extends Thread {
     private static final int MIN = 1;
     private static final int MAX = 5;
     private static String winner;
-    private static List<String> winnerList;
+    private static Map<String, Instant> winnerMap;
 
     public ThreadsRace(String name, int iterations) {
         this.name = name;
@@ -28,12 +28,12 @@ public class ThreadsRace extends Thread {
             }
         }
         Instant finish = Instant.now();
-        saveWinner(name, finish);
+        saveWinner(name);
+        winnerMap.put(name, finish);
     }
 
-    static synchronized private void saveWinner(String name, Instant finish) {
+    static synchronized private void saveWinner(String name) {
         if (winner == null) winner = name;
-        winnerList.add(name + " " + finish);
     }
 
     private static int getPeriod() {
@@ -48,11 +48,11 @@ public class ThreadsRace extends Thread {
         ThreadsRace.winner = winner;
     }
 
-    public static List<String> getWinnerList() {
-        return winnerList;
+    public static Map<String, Instant> getWinnerMap() {
+        return winnerMap;
     }
 
-    public static void setWinnerList(List<String> winnerList) {
-        ThreadsRace.winnerList = winnerList;
+    public static void setWinnerMap(Map<String, Instant> winnerMap) {
+        ThreadsRace.winnerMap = winnerMap;
     }
 }

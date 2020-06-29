@@ -16,7 +16,6 @@ public class FarmAppl {
         Instant finish = Instant.now();
         System.out.printf("Running time: %d; elevator1: %d; elevator2: %d;", ChronoUnit.MILLIS.between(start, finish),
                 Truck.getElevator1(), Truck.getElevator2());
-
     }
 
     private static void waitingForFinish(Truck[] trucks) {

@@ -14,12 +14,11 @@ public class PrinterController {
     }
 
     private static void setPrinters() {
-        int length = order.length;
+        int length = order.length-1;
         for (int i = 0; i < length; i++) {
-            if (i == length - 1) {
-                printers[order[i]].setThread(printers[order[0]]);
-            } else printers[order[i]].setThread(printers[order[i + 1]]);
+            printers[order[i]].setThread(printers[order[i + 1]]);
         }
+        printers[order[length]].setThread(printers[order[0]]);
     }
 
     private static void startThread() {

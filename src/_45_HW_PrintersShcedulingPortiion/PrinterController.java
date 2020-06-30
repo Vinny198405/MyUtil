@@ -14,7 +14,7 @@ public class PrinterController {
     }
 
     private static void setPrinters() {
-        int length = order.length-1;
+        int length = order.length - 1;
         for (int i = 0; i < length; i++) {
             printers[order[i]].setThread(printers[order[i + 1]]);
         }

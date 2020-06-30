@@ -28,12 +28,12 @@ public class ThreadsRace extends Thread {
             }
         }
         Instant finish = Instant.now();
-        saveWinner(name);
-        winnerMap.put(name, finish);
+        saveWinner(name, finish);
     }
 
-    static synchronized private void saveWinner(String name) {
+    static synchronized private void saveWinner(String name, Instant finish) {
         if (winner == null) winner = name;
+        winnerMap.put(name, finish);
     }
 
     private static int getPeriod() {

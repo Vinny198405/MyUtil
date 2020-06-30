@@ -4,10 +4,8 @@ import _39_HW_MenuItemsInputOutput.menu.InputOutput;
 import _47_HW_ThreadsRace.ThreadsRace;
 
 import java.time.Instant;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class ThreadsRaceStartItem extends ThreadsRaceItem {
 
@@ -23,7 +21,7 @@ public class ThreadsRaceStartItem extends ThreadsRaceItem {
     @Override
     public void perform() {
         ThreadsRace.setWinner(null);
-        ThreadsRace.setWinnerMap(new HashMap<>());
+        ThreadsRace.setWinnerMap(new LinkedHashMap<>());
         int threads = inputOutput.inputInteger("Enter number of threads [2-1000]:", 2, 1000);
         int distance = inputOutput.inputInteger("Enter number of distance [2-1000]:", 2, 1000);
         try {
@@ -38,12 +36,8 @@ public class ThreadsRaceStartItem extends ThreadsRaceItem {
 
     private void printMapListWinners() {
         Map<String, Instant> winnerMap = ThreadsRace.getWinnerMap();
-        Map<String, Instant> result = winnerMap.entrySet().stream()
-                .sorted(Map.Entry.comparingByValue())
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
-                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
         System.out.println();
-        result.forEach((k, v) -> System.out.println(k + " " + v));
+        winnerMap.forEach((k, v) -> System.out.println(k + " " + v));
     }
 
     private void startThreads(int threads, int distance) throws InterruptedException {

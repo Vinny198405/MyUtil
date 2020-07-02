@@ -1,6 +1,6 @@
 package _40_HW_EmployeesMapsStreams.items;
 
-import EmployeesMaps.EmployeesService;
+import _40_HW_EmployeesMapsStreams.api.EmployeesService;
 import _39_HW_MenuItemsInputOutput.menu.InputOutput;
 
 public class DisplayEmployee extends EmployeesItem {

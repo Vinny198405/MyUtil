@@ -1,7 +1,7 @@
 package _40_HW_EmployeesMapsStreams.server;
 
-import EmployeesMaps.EmployeesService;
-import EmployeesMaps.EmployeesServiceMapsImpl;
+import _40_HW_EmployeesMapsStreams.api.EmployeesService;
+import _40_HW_EmployeesMapsStreams.service.EmployeesServiceMapsImpl;
 import _38_CW_TcpJava.net.server.ProtocolJava;
 import _38_CW_TcpJava.net.server.ServerJava;
 import _40_HW_EmployeesMapsStreams.net.EmployeesTcpProtocol;

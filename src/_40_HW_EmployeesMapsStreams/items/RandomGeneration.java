@@ -1,8 +1,8 @@
 package _40_HW_EmployeesMapsStreams.items;
 
-import EmployeesMaps.Employee;
-import EmployeesMaps.EmployeesReturnCodes;
-import EmployeesMaps.EmployeesService;
+import _40_HW_EmployeesMapsStreams.api.EmployeesService;
+import _40_HW_EmployeesMapsStreams.dto.Employee;
+import _40_HW_EmployeesMapsStreams.dto.EmployeesReturnCodes;
 import _39_HW_MenuItemsInputOutput.menu.InputOutput;
 
 import java.time.LocalDate;

@@ -1,11 +1,8 @@
 package _40_HW_EmployeesMapsStreams.service;
 
-import EmployeesMaps.Employee;
-import EmployeesMaps.EmployeesReturnCodes;
-import EmployeesMaps.EmployeesService;
+import _40_HW_EmployeesMapsStreams.dto.*;
+import _40_HW_EmployeesMapsStreams.api.EmployeesService;
 import _38_CW_TcpJava.net.TcpClientJava;
-import _40_HW_EmployeesMapsStreams.dto.CompanySalary;
-import _40_HW_EmployeesMapsStreams.dto.RequestData;
 
 import java.util.List;
 import java.util.Map;

@@ -1,7 +1,7 @@
 package _40_HW_EmployeesMapsStreams.items;
 
-import EmployeesMaps.EmployeesService;
 import _39_HW_MenuItemsInputOutput.menu.InputOutput;
+import _40_HW_EmployeesMapsStreams.api.EmployeesService;
 
 public class UpdateSalary extends EmployeesItem {
 

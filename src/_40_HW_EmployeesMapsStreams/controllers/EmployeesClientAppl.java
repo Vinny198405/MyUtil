@@ -1,6 +1,6 @@
 package _40_HW_EmployeesMapsStreams.controllers;
 
-import EmployeesMaps.*;
+import _40_HW_EmployeesMapsStreams.api.EmployeesService;
 import _39_HW_MenuItemsInputOutput.menu.*;
 import _40_HW_EmployeesMapsStreams.items.*;
 import _40_HW_EmployeesMapsStreams.service.EmployeesTcpProxy;

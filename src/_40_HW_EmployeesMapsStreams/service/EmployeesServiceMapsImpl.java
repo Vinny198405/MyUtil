@@ -47,9 +47,9 @@ public class EmployeesServiceMapsImpl implements EmployeesService {
     }
 
     private <T> void addToEmployees(Employee empl, T key, Map<T, List<Employee>> employees) {
-            List<Employee> list = employees.getOrDefault(key, new ArrayList<>());
-            list.add(empl);
-            employees.putIfAbsent(key, list);
+        List<Employee> list = employees.getOrDefault(key, new ArrayList<>());
+        list.add(empl);
+        employees.putIfAbsent(key, list);
     }
 
     @Override
@@ -70,10 +70,10 @@ public class EmployeesServiceMapsImpl implements EmployeesService {
     }
 
     private <T> void removeFromEmployees(Employee employee, T key, Map<T, List<Employee>> empl) {
-            List<Employee> list = empl.get(key);
-            if (list.size() == 1) {
-                empl.remove(key);
-            } else list.remove(employee);
+        List<Employee> list = empl.get(key);
+        if (list.size() == 1) {
+            empl.remove(key);
+        } else list.remove(employee);
     }
 
     @Override
@@ -208,12 +208,7 @@ public class EmployeesServiceMapsImpl implements EmployeesService {
     }
 
     private Double getAvgSalary() {
-        try {
-            readLock.lock();
-            return employees.values().stream().collect(Collectors.averagingInt(Employee::getSalary));
-        } finally {
-            readLock.unlock();
-        }
+        return employees.values().stream().collect(Collectors.averagingInt(Employee::getSalary));
     }
 
     private Stream<CompanySalary> getStreamCompanySalary() {

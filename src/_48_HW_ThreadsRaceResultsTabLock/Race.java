@@ -13,8 +13,7 @@ public class Race {
     public int distance;
     public ArrayList<Racer> results;
     public Instant start;
-    private ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
-    public Lock writeLock = lock.writeLock();
+    public Lock lock = new ReentrantLock();
 
     public Race(int min_sleep, int max_sleep, int distance) {
         super();

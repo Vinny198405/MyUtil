@@ -31,11 +31,11 @@ public class Racer extends Thread {
 
     private void addResult() {
         try {
-            race.writeLock.lock();
+            race.lock.lock();
             runTime = ChronoUnit.MILLIS.between(race.start, Instant.now());
             race.results.add(this);
         } finally {
-            race.writeLock.unlock();
+            race.lock.unlock();
         }
     }
 

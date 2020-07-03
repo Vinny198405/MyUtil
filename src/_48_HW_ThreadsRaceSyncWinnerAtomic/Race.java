@@ -6,7 +6,6 @@ public class Race {
     public  int min_sleep;
     public  int max_sleep;
     public int distance;
-    //public int winnerId = 0;
     public AtomicInteger winnerId;
     public Race(int min_sleep, int max_sleep, int distance) {
         super();

@@ -6,7 +6,7 @@ import java.time.temporal.ChronoUnit;
 public class Racer extends Thread {
     private int threadId;
     private final Race race;
-    private long runTime;
+    private volatile long runTime;
 
 
     public Racer(int id, Race race) {
@@ -26,13 +26,9 @@ public class Racer extends Thread {
 
             }
         }
-        addResult();
-    }
-
-    private void addResult() {
+        runTime = ChronoUnit.MILLIS.between(race.start, Instant.now());
         try {
             race.lock.lock();
-            runTime = ChronoUnit.MILLIS.between(race.start, Instant.now());
             race.results.add(this);
         } finally {
             race.lock.unlock();

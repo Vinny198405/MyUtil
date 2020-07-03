@@ -22,9 +22,8 @@ public class Racer extends Thread {
             }
         }
 
-        if (race.winnerId.get() == 0) {
-            race.winnerId.set(threadId);
-        }
+        race.winnerId.compareAndSet(0, threadId);
+
     }
 
     public int getThreadId() {

@@ -14,8 +14,7 @@ public class SenderReceiverAppl {
         Receiver[] receivers = new Receiver[N_RECEIVERS];
         for (int i = 0; i < N_RECEIVERS; i++) {
             receivers[i] = new Receiver();
-            if (receivers[i].getId() % 2 == 0) receivers[i].setMessageBox(messageBoxEven);
-            else receivers[i].setMessageBox(messageBoxOdd);
+            receivers[i].setMessageBox(receivers[i].getId() % 2 == 0 ? messageBoxEven : messageBoxOdd);
             receivers[i].start();
         }
         sender.start();

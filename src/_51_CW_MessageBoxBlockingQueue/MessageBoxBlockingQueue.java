@@ -12,8 +12,6 @@ public class MessageBoxBlockingQueue {
     }
 
     public void put(String message) throws InterruptedException {
-        while (!blockingQueue.isEmpty()){
-        }
         blockingQueue.put(message);
     }
 
